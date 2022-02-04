@@ -1,4 +1,4 @@
-package com.daclink.drew.sp22.cst438_project01_starter;
+package com.daclink.drew.sp22.cst438_project01_starter.views;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,19 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentSecondBinding;
+import com.daclink.drew.sp22.cst438_project01_starter.R;
+import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentFirstBinding;
 
-public class SecondFragment extends Fragment {
+public class FirstFragment extends Fragment {
 
-    private FragmentSecondBinding binding;
+    private FragmentFirstBinding binding;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
-    ) {
+    ){
 
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
+        binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -29,11 +30,11 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_movieSearchFragment);
             }
         });
     }

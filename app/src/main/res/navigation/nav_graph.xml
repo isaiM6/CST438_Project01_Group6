@@ -14,9 +14,6 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
-        <action
-            android:id="@+id/action_FirstFragment_to_movieSearchFragment"
-            app:destination="@id/movieSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -26,15 +23,6 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/movieSearchFragment"
-        android:name="com.daclink.drew.sp22.cst438_project01_starter.MovieSearchFragment"
-        android:label="fragment_movie_search"
-        tools:layout="@layout/fragment_movie_search" >
-        <action
-            android:id="@+id/action_movieSearchFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

@@ -42,7 +42,6 @@ public class UserProfile extends AppCompatActivity {
         });
 
         //NEED TO ADD NEW ACTIVITIES TO GO TO WHEN BUTTON IS CLICKED
-        //
 
         favoritesBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -38,4 +38,13 @@
             android:id="@+id/action_SearchFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <activity
+        android:id="@+id/changePasswordActivity"
+        android:name="com.daclink.drew.sp22.cst438_project01_starter.ChangePasswordActivity"
+        android:label="activity_change_password"
+        tools:layout="@layout/activity_change_password" />
+    <activity
+        android:id="@+id/createAccountActivity"
+        android:name="com.daclink.drew.sp22.cst438_project01_starter.CreateAccountActivity"
+        android:label="CreateAccountActivity" />
 </navigation>

@@ -59,13 +59,18 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if (!validatePasswords()) {
                     Toast.makeText(CreateAccountActivity.this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
 
-                } else if(mUsername.equals("")){
+                }else if(mUsername.equals("")){
                     Toast.makeText(CreateAccountActivity.this, "Username field cannot be empty.", Toast.LENGTH_SHORT).show();
+                }else if(db.userDao().getUserByUsername(mUsername) != null){
+                    Toast.makeText(CreateAccountActivity.this, "Username already exists.", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     UserEntity user = new UserEntity(mUsername,mPassword,mName);
                     db.userDao().insertUser(user);
                     Toast.makeText(getApplicationContext(), "Created account successfully", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                    startActivity(intent);
                 }
             }
         });

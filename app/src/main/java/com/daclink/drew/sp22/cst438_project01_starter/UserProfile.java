@@ -19,12 +19,13 @@ public class UserProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+        /*
 
         logoutBtn = (Button)findViewById(R.id.logoutBtn);
         changePW = (Button)findViewById(R.id.changePW);
         favoritesBtn = (Button)findViewById(R.id.favorites);
         historyBtn = (Button)findViewById(R.id.searchHistory);
-
+        */
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

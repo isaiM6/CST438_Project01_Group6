@@ -50,7 +50,7 @@ public class SearchFragment extends Fragment {
         int iter = 0;
         super.onViewCreated(view, savedInstanceState);
 
-        adapter = new SearchResultsAdapter(getContext());
+        adapter = new SearchResultsAdapter();
 
         viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
         viewModel.init();

@@ -15,7 +15,7 @@ import com.daclink.drew.sp22.cst438_project01_starter.adapters.MovieListAdapter;
 import com.daclink.drew.sp22.cst438_project01_starter.adapters.SearchResultsAdapter;
 import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
-import com.daclink.drew.sp22.cst438_project01_starter.viewModels.MovieListViewModel;
+import com.daclink.drew.sp22.cst438_project01_starter.viewModels.DetailsViewModel;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +23,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 public class MovieListActivity extends AppCompatActivity {
-    private MovieListViewModel mViewModel;
+    private DetailsViewModel mViewModel;
     private RecyclerView mRecyclerView;
     private MovieListAdapter mAdapter;
 
@@ -35,17 +35,6 @@ public class MovieListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_list);
 
         mAdapter = new MovieListAdapter(getApplicationContext(), mMovies);
-
-        mViewModel = ViewModelProviders.of(this).get(MovieListViewModel.class);
-        mViewModel.init();
-        mViewModel.getMovies().observe(this, new Observer<List<MovieEntity>>() {
-            @Override
-            public void onChanged(@Nullable List<MovieEntity> movies) {
-                if (movies != null) {
-                    mAdapter.notifyDataSetChanged();
-                }
-            }
-        });
 
         mRecyclerView = findViewById(R.id.movielist_movieListRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

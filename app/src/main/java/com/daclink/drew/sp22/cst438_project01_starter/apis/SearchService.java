@@ -1,6 +1,7 @@
 package com.daclink.drew.sp22.cst438_project01_starter.apis;
 
 import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
+import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,8 +13,8 @@ public interface SearchService {
             @Query("s") String title
     );
 
-    @GET("?apikey=4d25d61f&type=movie")
-    Call<APIValues> searchValuesByIMDB_Id(
+    @GET("?apikey=4d25d61f")
+    Call<IndividualSearch> searchValuesByIMDB_Id(
             @Query("i") String imdbId
     );
 }

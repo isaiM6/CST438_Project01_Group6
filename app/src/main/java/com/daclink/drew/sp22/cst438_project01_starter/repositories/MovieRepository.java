@@ -1,76 +1,56 @@
 package com.daclink.drew.sp22.cst438_project01_starter.repositories;
 
-import android.content.Context;
-
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
-import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
-import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
-import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+import com.daclink.drew.sp22.cst438_project01_starter.apis.SearchService;
+import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MovieRepository {
-    public static MovieRepository instance;
+    private static final String SEARCH_SERVICE_BASE_URL = "https://omdbapi.com/";
 
-    public List<MovieEntity> mMovies;
-    private AppDatabase mDb;
-    private Executor executor = Executors.newSingleThreadExecutor();
+    private SearchService mSearchService;
+    private MutableLiveData<IndividualSearch> mResponseLiveData;
 
-    public static MovieRepository getInstance(Context context) {
-        if (instance == null) {
-            instance = new MovieRepository(context);
-        }
-        return instance;
+    public MovieRepository() {
+        mResponseLiveData = new MutableLiveData<IndividualSearch>();
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.level(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+        mSearchService = new retrofit2.Retrofit.Builder()
+                .baseUrl(SEARCH_SERVICE_BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(SearchService.class);
     }
 
-    private MovieRepository(Context context) {
-        mDb = AppDatabase.getInstance(context);
-        mMovies = getAllMovies();
+    public void searchMovieByIMDB_Id(String imdbId) {
+        mSearchService.searchValuesByIMDB_Id(imdbId)
+                .enqueue(new Callback<IndividualSearch>() {
+                    @Override
+                    public void onResponse(Call<IndividualSearch> call, Response<IndividualSearch> response) {
+                        if (response.body() != null) {
+                            mResponseLiveData.postValue(response.body());
+                            System.out.println(response);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<IndividualSearch> call, Throwable t) {
+                        mResponseLiveData.postValue(null);
+                    }
+                });
     }
 
-    public List<MovieEntity> getAllMovies() {
-        return mDb.movieDao().getAllMovies();
-    }
-
-    public MovieEntity getMovieById(int movieId) {
-        return mDb.movieDao().getMovieById(movieId);
-    }
-
-    public MovieEntity getMovieByImdbId(String imdbId) {
-        return mDb.movieDao().getMovieByImdbId(imdbId);
-    }
-
-    public void insertMovie(MovieEntity movie) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.movieDao().insertMovie(movie);
-            }
-        });
-    }
-
-    public void insertMovies(List<MovieEntity> movies) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.movieDao().insertMovies(movies);
-            }
-        });
-    }
-
-    public void deleteMovie(MovieEntity movie) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.movieDao().deleteMovie(movie);
-            }
-        });
-    }
-
-    public MutableLiveData<List<MovieEntity>> getMovies() {
-        MutableLiveData<List<MovieEntity>> movies = new MutableLiveData<>();
-        movies.setValue(mMovies);
-        return movies;
+    public LiveData<IndividualSearch> getResponseLiveData() {
+        return mResponseLiveData;
     }
 }

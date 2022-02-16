@@ -53,24 +53,6 @@ public class Repository {
                 });
     }
 
-    public void searchMovieByIMDB_Id(String imdbId) {
-        searchService.searchValuesByIMDB_Id(imdbId)
-                .enqueue(new Callback<APIValues>() {
-                    @Override
-                    public void onResponse(Call<APIValues> call, Response<APIValues> response) {
-                        if (response.body() != null) {
-                            responseLiveData.postValue(response.body());
-                            System.out.println(response);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<APIValues> call, Throwable t) {
-                        responseLiveData.postValue(null);
-                    }
-                });
-    }
-
     public LiveData<APIValues> getResponseLiveData() {
         return responseLiveData;
     }

@@ -29,6 +29,7 @@ import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
 import com.daclink.drew.sp22.cst438_project01_starter.models.Search;
 import com.daclink.drew.sp22.cst438_project01_starter.repositories.Repository;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
+import com.daclink.drew.sp22.cst438_project01_starter.viewModels.DetailsViewModel;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.SearchViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
@@ -51,6 +52,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private String mImageUrl;
     private String mImdbId;
 
+    private IndividualSearch mMovie;
+
     private TextView mTitleTextView;
     private TextView mDirectorTextView;
     private TextView mActorsTextView;
@@ -65,10 +68,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     private ActivityMovieDetailsBinding mBinding;
 
-    private Repository mRepo;
-    private LiveData<APIValues> mResponseLiveData;
-
-    private SearchViewModel mViewModel;
+    private DetailsViewModel mViewModel;
 
     // private SharedPreferences mPrefs;
 
@@ -87,24 +87,22 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         mImdbId = getIntent().getStringExtra(constants.IMDB_ID);
 
-        mViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
         mViewModel.init();
-        mViewModel.getVolumesResponseLiveData().observe(this, new Observer<APIValues>() {
+        mViewModel.getResponseLiveData().observe(this, new Observer<IndividualSearch>() {
             @Override
-            public void onChanged(APIValues response) {
-                if (response != null) {
-                    List<IndividualSearch> result = response.getIndividualSearch();
-                    Toast.makeText(getApplicationContext(), "hello " + result, Toast.LENGTH_SHORT).show();
+            public void onChanged(IndividualSearch movie) {
+                if (movie.getResponse() != null) {
+                    mMovie = movie;
+                    wireUpDisplay();
+                    setValues();
+                    setImageView();
+                    setTextViews();
                 }
             }
         });
 
         mViewModel.searchMovie(mImdbId);
-
-        // wireUpDisplay();
-        // setValues();
-        // setImageView();
-        // setTextViews();
 
         mBinding.movieDetailsFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,23 +140,22 @@ public class MovieDetailsActivity extends AppCompatActivity {
     }
 
     private void setValues() {
-        mTitle = getIntent().getStringExtra(constants.TITLE);
-        mYear = getIntent().getStringExtra(constants.YEAR);
-        mDirector = getIntent().getStringExtra(constants.DIRECTOR);
-        mActors = getIntent().getStringExtra(constants.ACTORS);
-        mMetascore = getIntent().getStringExtra(constants.METASCORE);
-        mBoxOffice = getIntent().getStringExtra(constants.BOX_OFFICE);
-        mReleased = getIntent().getStringExtra(constants.RELEASED);
-        mGenre = getIntent().getStringExtra(constants.GENRE);
-        mRated = getIntent().getStringExtra(constants.RATED);
-        mRuntime = getIntent().getStringExtra(constants.RUNTIME);
-        mPlot = getIntent().getStringExtra(constants.PLOT);
-        mYear = getIntent().getStringExtra(constants.YEAR);
-        mImdbId = getIntent().getStringExtra(constants.IMDB_ID);
+        mTitle = mMovie.getTitle();
+        mYear = mMovie.getYear();
+        mDirector = mMovie.getDirector();
+        mActors = mMovie.getActors();
+        mMetascore = mMovie.getMetascore();
+        mBoxOffice = mMovie.getBoxOffice();
+        mReleased = mMovie.getReleased();
+        mGenre = mMovie.getGenre();
+        mRated = mMovie.getRated();
+        mRuntime = mMovie.getRuntime();
+        mPlot = mMovie.getPlot();
+        mYear = mMovie.getYear();
     }
 
     private void setImageView() {
-        mImageUrl = getIntent().getStringExtra(constants.POSTER);
+        mImageUrl = mMovie.getPoster();
 
         if (mImageUrl != null) {
             mImageUrl.replace("http://", "https://");

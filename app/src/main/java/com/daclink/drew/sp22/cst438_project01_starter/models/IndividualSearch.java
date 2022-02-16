@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class IndividualSearch implements Parcelable {
+public class IndividualSearch {
     @SerializedName("Title")
     @Expose
     private String title;
@@ -102,51 +102,9 @@ public class IndividualSearch implements Parcelable {
     @Expose
     private String website;
 
-    public final static Creator<IndividualSearch> CREATOR = new Creator<IndividualSearch>() {
-
-
-        @SuppressWarnings({
-                "unchecked"
-        })
-        public IndividualSearch createFromParcel(android.os.Parcel in) {
-            return new IndividualSearch(in);
-        }
-
-        public IndividualSearch[] newArray(int size) {
-            return (new IndividualSearch[size]);
-        }
-
-    };
-
-    protected IndividualSearch(android.os.Parcel in) {
-        this.title = ((String) in.readValue((String.class.getClassLoader())));
-        this.year = ((String) in.readValue((String.class.getClassLoader())));
-        this.rated = ((String) in.readValue((String.class.getClassLoader())));
-        this.released = ((String) in.readValue((String.class.getClassLoader())));
-        this.runtime = ((String) in.readValue((String.class.getClassLoader())));
-        this.genre = ((String) in.readValue((String.class.getClassLoader())));
-        this.director = ((String) in.readValue((String.class.getClassLoader())));
-        this.writer = ((String) in.readValue((String.class.getClassLoader())));
-        this.actors = ((String) in.readValue((String.class.getClassLoader())));
-        this.plot = ((String) in.readValue((String.class.getClassLoader())));
-        this.language = ((String) in.readValue((String.class.getClassLoader())));
-        this.country = ((String) in.readValue((String.class.getClassLoader())));
-        this.awards = ((String) in.readValue((String.class.getClassLoader())));
-        this.poster = ((String) in.readValue((String.class.getClassLoader())));
-        this.metascore = ((String) in.readValue((String.class.getClassLoader())));
-        this.imdbRating = ((String) in.readValue((String.class.getClassLoader())));
-        this.imdbVotes = ((String) in.readValue((String.class.getClassLoader())));
-        this.imdbID = ((String) in.readValue((String.class.getClassLoader())));
-        this.type = ((String) in.readValue((String.class.getClassLoader())));
-        this.dvd = ((String) in.readValue((String.class.getClassLoader())));
-        this.boxOffice = ((String) in.readValue((String.class.getClassLoader())));
-        this.production = ((String) in.readValue((String.class.getClassLoader())));
-        this.website = ((String) in.readValue((String.class.getClassLoader())));
-    }
-
-    public IndividualSearch() {
-
-    }
+    @SerializedName("Response")
+    @Expose
+    private String response;
 
     public List<String> getValues() {
         ArrayList list = new ArrayList(
@@ -354,33 +312,11 @@ public class IndividualSearch implements Parcelable {
         this.website = website;
     }
 
-    public void writeToParcel(android.os.Parcel dest, int flags) {
-        dest.writeValue(title);
-        dest.writeValue(year);
-        dest.writeValue(rated);
-        dest.writeValue(released);
-        dest.writeValue(runtime);
-        dest.writeValue(genre);
-        dest.writeValue(director);
-        dest.writeValue(writer);
-        dest.writeValue(actors);
-        dest.writeValue(plot);
-        dest.writeValue(language);
-        dest.writeValue(country);
-        dest.writeValue(awards);
-        dest.writeValue(poster);
-        dest.writeValue(metascore);
-        dest.writeValue(imdbRating);
-        dest.writeValue(imdbVotes);
-        dest.writeValue(imdbID);
-        dest.writeValue(type);
-        dest.writeValue(dvd);
-        dest.writeValue(boxOffice);
-        dest.writeValue(production);
-        dest.writeValue(website);
+    public String getResponse() {
+        return response;
     }
 
-    public int describeContents() {
-        return  0;
+    public void setResponse(String response) {
+        this.response = response;
     }
 }

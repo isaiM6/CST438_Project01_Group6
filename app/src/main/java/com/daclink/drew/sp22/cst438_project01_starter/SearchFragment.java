@@ -60,8 +60,6 @@ public class SearchFragment extends Fragment {
             @Override
             public void onChanged(APIValues response) {
                 if (response != null) {
-                    Toast.makeText(getContext(), "hello " + response, Toast.LENGTH_SHORT).show();
-
                     adapter.setResults(response.getSearch());
                 }
             }

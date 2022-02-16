@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
+import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
 import com.daclink.drew.sp22.cst438_project01_starter.repositories.Repository;
 
 public class SearchViewModel extends AndroidViewModel {
@@ -24,10 +25,6 @@ public class SearchViewModel extends AndroidViewModel {
 
     public void searchVolumes(String title) {
         repository.searchVolumes(title);
-    }
-
-    public void searchMovie(String imdbId) {
-        repository.searchMovieByIMDB_Id(imdbId);
     }
 
     public LiveData<APIValues> getVolumesResponseLiveData() {

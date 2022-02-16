@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
+import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 
@@ -28,8 +29,6 @@ public class LoginActivity extends AppCompatActivity{
     private Button mCreateAccBtn;
 
     SharedPreferences sharedPreferences;
-    private static final String SHARED_PREF_NAME = "MyPrefs";
-    private static final String KEY_USERNAME = "username";
 
 
     @Override
@@ -42,7 +41,7 @@ public class LoginActivity extends AppCompatActivity{
         mLoginBtn = findViewById(R.id.button_login);
         mCreateAccBtn = findViewById(R.id.button_register);
 
-        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(constants.SHARED_PREF_NAME,MODE_PRIVATE);
 
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
@@ -55,15 +54,12 @@ public class LoginActivity extends AppCompatActivity{
                 if(db.userDao().userExists(mUsername)){
                     if(db.userDao().getUserByUsername(mUsername).getPassword().equals(mPassword)){
                         Toast.makeText(getApplicationContext(), "Login Successful.", Toast.LENGTH_SHORT).show();
-                        //SharedPreferences.Editor editor = sharedPreferences.edit();
-                        //editor.putString(KEY_USERNAME,mUsername);
-                        //editor.apply();
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString(constants.KEY_USERNAME,mUsername);
+                        editor.apply();
 
                         Intent intent = new Intent(v.getContext(), MainActivity.class);
                         startActivity(intent);
-
-
-                        //openNewActivity();
 
                     }
                     else{

@@ -20,8 +20,12 @@ import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentFirstB
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentSearchBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentSecondBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
+import com.daclink.drew.sp22.cst438_project01_starter.models.Search;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.SearchViewModel;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFragment extends Fragment {
 
@@ -30,7 +34,7 @@ public class SearchFragment extends Fragment {
     private SearchResultsAdapter adapter;
 
     private TextInputEditText keywordEditText, authorEditText;
-    private Button searchButton;
+    private Button searchButton, saveButton;
 
     @Nullable
     @Override
@@ -43,18 +47,16 @@ public class SearchFragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        int iter = 0;
         super.onViewCreated(view, savedInstanceState);
 
         adapter = new SearchResultsAdapter(getContext());
 
         viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
         viewModel.init();
-        viewModel.getVolumesResponseLiveData().observe(getViewLifecycleOwner(), new Observer<APIValues>() {
-            @Override
-            public void onChanged(APIValues response) {
-                if (response != null) {
-                    adapter.setResults(response);
-                }
+        viewModel.getVolumesResponseLiveData().observe(getViewLifecycleOwner(), response -> {
+            if (response != null) {
+                adapter.setResults(response.getSearch());
             }
         });
 //        this.binding.fragmentSearchToFirstFragment.setOnClickListener(view1 -> NavHostFragment.findNavController(SearchFragment.this)
@@ -66,8 +68,20 @@ public class SearchFragment extends Fragment {
 
         keywordEditText = view.findViewById(R.id.fragment_search_keyword);
         searchButton = view.findViewById(R.id.fragment_search);
+        saveButton = view.findViewById(R.id.fragment_search);
 
         searchButton.setOnClickListener(view3 -> performSearch());
+        // commented out for future fixing
+//        saveButton.setId(iter+1);
+//        saveButton.setOnClickListener(view3 -> saveMovie());
+    }
+
+    // this is supposed to save the movie when the save button is clicked
+    public void saveMovie(){
+        List<Search> moviesList = viewModel.getVolumesResponseLiveData().getValue().getSearch();
+        moviesList.get(saveButton.getId());
+
+        // save movie clicked to the user's section in the db
     }
 
     public void performSearch() {

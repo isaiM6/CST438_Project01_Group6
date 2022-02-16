@@ -9,7 +9,7 @@ import retrofit2.http.Query;
 public interface SearchService {
     @GET("?apikey=4d25d61f&type=movie")
     Call<APIValues> searchValues(
-            @Query("t") String title
+            @Query("s") String title
     );
 
     @GET("?apikey=4d25d61f&type=movie")

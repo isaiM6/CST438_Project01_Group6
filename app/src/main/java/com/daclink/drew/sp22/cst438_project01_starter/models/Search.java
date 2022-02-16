@@ -4,23 +4,32 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-    public class Search implements Parcelable
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Search implements Parcelable
     {
         @SerializedName("Title")
         @Expose
         private String title;
+
         @SerializedName("Year")
         @Expose
         private String year;
+
         @SerializedName("imdbID")
         @Expose
         private String imdbID;
+
         @SerializedName("Type")
         @Expose
         private String type;
+
         @SerializedName("Poster")
         @Expose
         private String poster;
+
         public final static Creator<Search> CREATOR = new Creator<Search>() {
 
 
@@ -54,14 +63,6 @@ import com.google.gson.annotations.SerializedName;
                     ", type='" + type + '\'' +
                     ", poster='" + poster + '\'' +
                     '}';
-        }
-
-        public Search(String title, String year, String imdbID, String type, String poster) {
-            this.title = title;
-            this.year = year;
-            this.imdbID = imdbID;
-            this.type = type;
-            this.poster = poster;
         }
 
         public Search() {
@@ -107,12 +108,31 @@ import com.google.gson.annotations.SerializedName;
             this.poster = poster;
         }
 
+        public String getImdbId() {
+            return imdbID;
+        }
+
+        public void setImdbId(String imdbID) {
+            this.imdbID = imdbID;
+        }
+
         public void writeToParcel(android.os.Parcel dest, int flags) {
             dest.writeString(title);
             dest.writeString(year);
             dest.writeString(imdbID);
             dest.writeString(type);
             dest.writeString(poster);
+            dest.writeValue(poster);
+        }
+
+        public List<String> getValues() {
+            ArrayList list = new ArrayList(
+                    Arrays.asList(this.title,
+                            this.year,
+                            this.poster,
+                            this.imdbID)
+            );
+            return list;
         }
 
         public int describeContents() {

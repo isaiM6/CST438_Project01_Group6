@@ -26,6 +26,10 @@ public class SearchViewModel extends AndroidViewModel {
         repository.searchVolumes(title);
     }
 
+    public void searchMovie(String imdbId) {
+        repository.searchMovieByIMDB_Id(imdbId);
+    }
+
     public LiveData<APIValues> getVolumesResponseLiveData() {
         return responseLiveData;
     }

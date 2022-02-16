@@ -1,10 +1,12 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,16 +49,21 @@ public class SearchFragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        int iter = 0;
+        // int iter = 0;
         super.onViewCreated(view, savedInstanceState);
 
-        adapter = new SearchResultsAdapter();
+        adapter = new SearchResultsAdapter(getContext());
 
         viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
         viewModel.init();
-        viewModel.getVolumesResponseLiveData().observe(getViewLifecycleOwner(), response -> {
-            if (response != null) {
-                adapter.setResults(response.getSearch());
+        viewModel.getVolumesResponseLiveData().observe(getViewLifecycleOwner(), new Observer<APIValues>() {
+            @Override
+            public void onChanged(APIValues response) {
+                if (response != null) {
+                    Toast.makeText(getContext(), "hello " + response, Toast.LENGTH_SHORT).show();
+
+                    adapter.setResults(response.getSearch());
+                }
             }
         });
 //        this.binding.fragmentSearchToFirstFragment.setOnClickListener(view1 -> NavHostFragment.findNavController(SearchFragment.this)

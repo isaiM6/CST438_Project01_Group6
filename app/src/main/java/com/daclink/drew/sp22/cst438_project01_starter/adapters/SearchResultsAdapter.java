@@ -1,5 +1,8 @@
 package com.daclink.drew.sp22.cst438_project01_starter.adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.daclink.drew.sp22.cst438_project01_starter.MainActivity;
+import com.daclink.drew.sp22.cst438_project01_starter.MovieDetailsActivity;
 import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
 import com.daclink.drew.sp22.cst438_project01_starter.R;
 import com.daclink.drew.sp22.cst438_project01_starter.models.Search;
+import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.SearchResultHolder> {
     private List<Search> searchResults = new ArrayList<>();
+    private Context context;
 
     @NonNull
     @Override
@@ -29,12 +36,26 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         return new SearchResultHolder(itemView);
     }
 
+    public SearchResultsAdapter(Context context) {
+        this.context = context;
+    }
+
+    public SearchResultsAdapter() {
+
+    }
+
     @Override
     public void onBindViewHolder(@NonNull SearchResultHolder holder, int position) {
         Search results = searchResults.get(position);
 
-        holder.titleTextView.setText(results.getTitle());
-        holder.releasedDateTextView.setText(results.getYear());
+        if (results.getTitle() != null) {
+            holder.titleTextView.setText(results.getTitle());
+        }
+
+        /*
+        if (results.getReleased() != null) {
+            holder.releasedDateTextView.setText(results.getYear());
+        }*/
 
         if (results.getPoster() != null) {
             String imageUrl = results.getPoster()
@@ -48,10 +69,21 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         if (results.getType() != null) {
             holder.directorTextView.setText(results.getType());
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MovieDetailsActivity.newIntent(context.getApplicationContext(), results.getImdbId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
+        if (searchResults == null) {
+            return 0;
+        }
         return searchResults.size();
     }
 

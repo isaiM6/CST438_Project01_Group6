@@ -1,27 +1,41 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivityMovieDetailsBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
+import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
+import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
+import com.daclink.drew.sp22.cst438_project01_starter.models.Search;
+import com.daclink.drew.sp22.cst438_project01_starter.repositories.Repository;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
+import com.daclink.drew.sp22.cst438_project01_starter.viewModels.SearchViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
+import java.util.Objects;
 
 public class MovieDetailsActivity extends AppCompatActivity {
-    private int mUserId;
+    // private int mUserId;
 
     private String mTitle;
     private String mYear;
@@ -49,30 +63,48 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     private ImageView mPosterImageView;
 
-    private UserEntity mUser;
-    private UserDao mUserDao;
-
     private ActivityMovieDetailsBinding mBinding;
 
-    private SharedPreferences mPrefs;
+    private Repository mRepo;
+    private LiveData<APIValues> mResponseLiveData;
+
+    private SearchViewModel mViewModel;
+
+    // private SharedPreferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
-        mPrefs = getSharedPreferences(constants.PREFERENCES_KEY, MODE_PRIVATE);
-        mUserId = mPrefs.getInt(constants.USER_ID_KEY, -1);
+        //mPrefs = getSharedPreferences(constants.PREFERENCES_KEY, MODE_PRIVATE);
+        // mUserId = mPrefs.getInt(constants.USER_ID_KEY, -1);
 
         mBinding = ActivityMovieDetailsBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
         // mUserDao = getDatabase();
         // mUser = mUserDao.getUserById(mUserId);
 
-        wireUpDisplay();
-        setValues();
-        setImageView();
-        setTextViews();
+        mImdbId = getIntent().getStringExtra(constants.IMDB_ID);
+
+        mViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
+        mViewModel.init();
+        mViewModel.getVolumesResponseLiveData().observe(this, new Observer<APIValues>() {
+            @Override
+            public void onChanged(APIValues response) {
+                if (response != null) {
+                    List<IndividualSearch> result = response.getIndividualSearch();
+                    Toast.makeText(getApplicationContext(), "hello " + result, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        mViewModel.searchMovie(mImdbId);
+
+        // wireUpDisplay();
+        // setValues();
+        // setImageView();
+        // setTextViews();
 
         mBinding.movieDetailsFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +113,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                     Snackbar.make(v, "You Already Saved This Movie", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 } else {
-                    addMovieToDb();
+                    // addMovieToDb();
 
                     Snackbar.make(v, "Movie Successfully Saved", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();                    // mUserDao.updateUser(mUser);
@@ -172,23 +204,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
         }
     }
 
-    public static Intent newIntent(Context packageContext, List<String> movieInfo) {
+    public static Intent newIntent(Context packageContext, String imdbId) {
         Intent intent = new Intent(packageContext, MovieDetailsActivity.class);
-
-        intent.putExtra(constants.TITLE, movieInfo.get(0));
-        intent.putExtra(constants.YEAR, movieInfo.get(1));
-        intent.putExtra(constants.RELEASED, movieInfo.get(2));
-        intent.putExtra(constants.GENRE, movieInfo.get(3));
-        intent.putExtra(constants.DIRECTOR, movieInfo.get(4));
-        intent.putExtra(constants.ACTORS, movieInfo.get(6));
-        intent.putExtra(constants.PLOT, movieInfo.get(7));
-        intent.putExtra(constants.METASCORE, movieInfo.get(8));
-        intent.putExtra(constants.POSTER, movieInfo.get(10));
-        intent.putExtra(constants.BOX_OFFICE, movieInfo.get(11));
-        intent.putExtra(constants.RATED, movieInfo.get(12));
-        intent.putExtra(constants.RUNTIME, movieInfo.get(14));
-        intent.putExtra(constants.IMDB_ID, movieInfo.get(15));
-
+        intent.putExtra(constants.IMDB_ID, imdbId);
         return intent;
     }
 }

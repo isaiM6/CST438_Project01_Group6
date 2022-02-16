@@ -67,7 +67,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 else{
                     UserEntity user = new UserEntity(mUsername,mPassword,mName);
                     db.userDao().insertUser(user);
-                    Toast.makeText(getApplicationContext(), "Created account successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Created account successfully", Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(v.getContext(), LoginActivity.class);
                     startActivity(intent);

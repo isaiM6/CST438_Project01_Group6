@@ -33,7 +33,7 @@ public interface UserDao {
     @Query("DELETE FROM " + AppDatabase.USER_TABLE)
     void deleteAllUsers();
 
-    @Query("SELECT EXISTS (SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :username)")
-    boolean userExists(String username);
+    @Query("SELECT EXISTS(SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :username)")
+    Boolean userExists(String username);
 
 }

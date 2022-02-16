@@ -13,9 +13,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
+import com.daclink.drew.sp22.cst438_project01_starter.util.SampleUsers;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class LoginActivity extends AppCompatActivity{
 
@@ -27,6 +31,8 @@ public class LoginActivity extends AppCompatActivity{
 
     private Button mLoginBtn;
     private Button mCreateAccBtn;
+
+    private AppDatabase mDb;
 
     SharedPreferences sharedPreferences;
 
@@ -43,7 +49,9 @@ public class LoginActivity extends AppCompatActivity{
 
         sharedPreferences = getSharedPreferences(constants.SHARED_PREF_NAME,MODE_PRIVATE);
 
-        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+        mDb = AppDatabase.getInstance(getApplicationContext());
+
+        sampleUsers();
 
         // Toast.makeText(getApplicationContext(), " " + db.userDao().getAllUsers(), Toast.LENGTH_SHORT).show();
 
@@ -53,8 +61,8 @@ public class LoginActivity extends AppCompatActivity{
                 mUsername = mUsernameField.getText().toString();
                 mPassword = mPasswordField.getText().toString();
 
-                if(db.userDao().userExists(mUsername)){
-                    if(db.userDao().getUserByUsername(mUsername).getPassword().equals(mPassword)){
+                if(mDb.userDao().userExists(mUsername)){
+                    if(mDb.userDao().getUserByUsername(mUsername).getPassword().equals(mPassword)){
                         Toast.makeText(getApplicationContext(), "Login Successful.", Toast.LENGTH_SHORT).show();
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString(constants.KEY_USERNAME,mUsername);
@@ -81,9 +89,20 @@ public class LoginActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-
-
     }
 
+    public void sampleUsers() {
+        if (mDb.userDao().getAllUsers().size() == 0) {
+            Executor executor = Executors.newSingleThreadExecutor();
+
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    mDb.userDao().insertUser(SampleUsers.getUsers().get(0),
+                                            SampleUsers.getUsers().get(1));
+                }
+            });
+        }
+    }
 
 }

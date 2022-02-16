@@ -51,8 +51,6 @@ public class FirstFragment extends Fragment {
         binding.favoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = MovieListActivity.newIntent(getContext());
-                startActivity(intent);
             }
         });
     }

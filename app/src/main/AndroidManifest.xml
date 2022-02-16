@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CST438_Project01_Starter">
         <activity
-            android:name=".MovieListActivity"
-            android:exported="true" />
-        <activity
             android:name=".MovieDetailsActivity"
             android:exported="true" />
         <activity

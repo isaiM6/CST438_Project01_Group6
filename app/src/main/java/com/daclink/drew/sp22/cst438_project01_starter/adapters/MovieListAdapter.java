@@ -12,17 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.daclink.drew.sp22.cst438_project01_starter.R;
-import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieListHolder> {
-    private List<MovieEntity> mResults = new ArrayList<>();
     private Context mContext;
 
-    public MovieListAdapter(Context context, List<MovieEntity> movies) {
-        this.mResults = movies;
+    public MovieListAdapter(Context context) {
         this.mContext = context;
     }
 
@@ -37,23 +34,6 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
     @Override
     public void onBindViewHolder(@NonNull MovieListHolder holder, int position) {
-        MovieEntity movie = mResults.get(position);
-
-        holder.titleTextView.setText(movie.getTitle());
-        holder.releasedTextView.setText(movie.getReleased());
-
-        if (movie.getPoster() != null) {
-            String imageUrl = movie.getPoster()
-                    .replace("http://", "https://");
-
-            Glide.with(holder.itemView)
-                    .load(imageUrl)
-                    .into(holder.posterImageView);
-        }
-
-        if (movie.getDirector() != null) {
-            holder.directorTextView.setText(movie.getDirector());
-        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,9 +43,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         });
     }
 
+
     @Override
     public int getItemCount() {
-        return mResults.size();
+        return 1;
     }
 
     class MovieListHolder extends RecyclerView.ViewHolder {

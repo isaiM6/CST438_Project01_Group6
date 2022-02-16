@@ -1,6 +1,7 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -31,12 +32,15 @@ import com.daclink.drew.sp22.cst438_project01_starter.repositories.Repository;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.DetailsViewModel;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.SearchViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 import java.util.Objects;
 
 public class MovieDetailsActivity extends AppCompatActivity {
-    // private int mUserId;
+    private int mUserId;
+
+    private boolean mFlag;
 
     private String mTitle;
     private String mYear;
@@ -68,24 +72,32 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     private ActivityMovieDetailsBinding mBinding;
 
+    private FloatingActionButton mFab;
+
     private DetailsViewModel mViewModel;
 
-    // private SharedPreferences mPrefs;
+    private UserEntity mUser;
+    private UserDao mUserDao;
+
+    private SharedPreferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
-        //mPrefs = getSharedPreferences(constants.PREFERENCES_KEY, MODE_PRIVATE);
-        // mUserId = mPrefs.getInt(constants.USER_ID_KEY, -1);
+        mPrefs = getSharedPreferences(constants.SHARED_PREF_NAME, MODE_PRIVATE);
+        mUserId = mPrefs.getInt(constants.USER_ID_KEY, -1);
 
         mBinding = ActivityMovieDetailsBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
-        // mUserDao = getDatabase();
-        // mUser = mUserDao.getUserById(mUserId);
+        mFab = mBinding.movieDetailsFab;
 
+        mUserDao = getDatabase();
+        mUser = mUserDao.getUserById(mUserId);
         mImdbId = getIntent().getStringExtra(constants.IMDB_ID);
+
+        changeIcon();
 
         mViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
         mViewModel.init();
@@ -104,17 +116,34 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         mViewModel.searchMovie(mImdbId);
 
-        mBinding.movieDetailsFab.setOnClickListener(new View.OnClickListener() {
+        mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (true) {
-                    Snackbar.make(v, "You Already Saved This Movie", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                if (!mUser.addImdbId(mImdbId)) {
+                    mUser.getImdbIds().remove(mImdbId);
+                    mUserDao.updateUser(mUser);
+                    changeIcon();
+
+                    Snackbar.make(v, "Movie Successfully Removed", Snackbar.LENGTH_LONG)
+                            .setAction("Go To List",
+                                    new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                        }
+                                    }).show();
                 } else {
-                    // addMovieToDb();
+                    mUserDao.updateUser(mUser);
+                    changeIcon();
 
                     Snackbar.make(v, "Movie Successfully Saved", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();                    // mUserDao.updateUser(mUser);
+                            .setAction("Go To List",
+                                    new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                        }
+                                    }).show();
                 }
             }
         });
@@ -122,8 +151,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     private UserDao getDatabase() {
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
-        UserDao userDao = db.userDao();
-        return userDao;
+        return db.userDao();
+    }
+
+    private void changeIcon() {
+        if (mUser.getImdbIds().contains(mImdbId)) {
+            mFab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_remove));
+        } else {
+            mFab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_add));
+        }
     }
 
     private void wireUpDisplay() {
@@ -176,10 +212,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mGenreTextView.append(": " + mGenre);
         mRatedTextView.setText(mRated + ", " + mRuntime);
         mPlotTextView.append(":\n\n     " + mPlot);
-    }
-
-    private void addMovieToDb() {
-        // check that movie isn't already in the db
     }
 
     @Override

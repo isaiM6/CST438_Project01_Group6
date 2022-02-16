@@ -16,21 +16,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.daclink.drew.sp22.cst438_project01_starter.adapters.SearchResultsAdapter;
-import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentFirstBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentSearchBinding;
-import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentSecondBinding;
-import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.SearchViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchFragment extends Fragment {
 
-    private @NonNull FragmentSearchBinding binding;
+    private @NonNull
+    FragmentSearchBinding binding;
     private SearchViewModel viewModel;
     private SearchResultsAdapter adapter;
 
     private TextInputEditText keywordEditText, authorEditText;
-    private Button searchButton;
+    private Button searchButton, saveButton;
 
     @Nullable
     @Override
@@ -49,30 +50,41 @@ public class SearchFragment extends Fragment {
 
         viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
         viewModel.init();
-        viewModel.getVolumesResponseLiveData().observe(getViewLifecycleOwner(), new Observer<APIValues>() {
-            @Override
-            public void onChanged(APIValues response) {
-                if (response != null) {
-                    adapter.setResults(response);
-                }
+        viewModel.getVolumesResponseLiveData().observe(getViewLifecycleOwner(), response -> {
+            if (response != null) {
+                adapter.setResults(response);
             }
         });
-//        this.binding.fragmentSearchToFirstFragment.setOnClickListener(view1 -> NavHostFragment.findNavController(SearchFragment.this)
-//                .navigate(R.id.action_SearchFragment_to_FirstFragment));
+
+        initialSearch();
 
         RecyclerView recyclerView = view.findViewById(R.id.fragment_search_searchResultsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
         keywordEditText = view.findViewById(R.id.fragment_search_keyword);
+        // if user is functional
+        // user.addSearchHistory(keywordEditText.getEditableText().toString());
         searchButton = view.findViewById(R.id.fragment_search);
+        saveButton = view.findViewById(R.id.fragment_search);
 
         searchButton.setOnClickListener(view3 -> performSearch());
+        // commented out for future fixing
+//        saveButton.setOnClickListener(view3 -> saveMovie(keywordEditText.getEditableText().toString()));
+    }
+
+    // this is supposed to save the movie when the save button is clicked
+    public void saveMovie(String title) {
+        // save movie clicked to the user's section in the db
+        // user.addFavMovie(title);
+    }
+
+    public void initialSearch() {
+        viewModel.searchVolumes("tron");
     }
 
     public void performSearch() {
         String title = keywordEditText.getEditableText().toString();
-
         viewModel.searchVolumes(title);
     }
 

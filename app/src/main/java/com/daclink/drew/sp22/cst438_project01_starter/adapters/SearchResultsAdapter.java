@@ -48,7 +48,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
     @Override
     public int getItemCount() {
-        return 25;
+        return 1;
     }
 
     public void setResults(APIValues results) {

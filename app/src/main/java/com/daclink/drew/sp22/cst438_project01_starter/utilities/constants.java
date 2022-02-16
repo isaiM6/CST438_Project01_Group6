@@ -11,17 +11,7 @@ public class constants {
     private static final String API_URL = "http://www.omdbapi.com";
     public static final String USER_ID_KEY = "userIdKey";
     public static final String PREFERENCES_KEY = "preferencesKey";
-    public static final String TITLE = "title";
-    public static final String YEAR = "year";
-    public static final String RELEASED = "released";
-    public static final String GENRE = "genre";
-    public static final String DIRECTOR = "director";
-    public static final String ACTORS = "actors";
-    public static final String METASCORE = "metascore";
-    public static final String BOX_OFFICE = "boxOffice";
-    public static final String PLOT = "plot";
-    public static final String POSTER = "poster";
-    public static final String RATED = "rated";
-    public static final String RUNTIME = "runtime";
     public static final String IMDB_ID = "imdbId";
+    public static final String SHARED_PREF_NAME = "prefs";
+    public static final String KEY_USERNAME = "username";
 }

@@ -20,6 +20,12 @@ import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Class: MovieListAdapter.java
+ * Description: The movie list adapter class just creates a
+ * set format and a RecyclerView for displaying movies.
+ * */
+
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieListHolder> {
     private List<IndividualSearch> mResults = new ArrayList<>();
     private Context mContext;

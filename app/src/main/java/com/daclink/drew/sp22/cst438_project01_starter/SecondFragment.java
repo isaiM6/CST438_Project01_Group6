@@ -11,6 +11,13 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentSecondBinding;
 
+/*
+ * Class: SecondFragment.java
+ * Description: Creates bindings and interactable
+ * aspects of the second fragment
+ * Note: unused but kept for future additions/functionality
+ * */
+
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;

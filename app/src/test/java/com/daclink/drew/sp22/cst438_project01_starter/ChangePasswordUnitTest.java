@@ -12,6 +12,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/*
+ * Class: ChangePasswordUnitTest.java
+ * Description: Tests for changing the passwords for the program.
+ * */
+
 public class ChangePasswordUnitTest {
     @Test
     public void getPasswordTest() {

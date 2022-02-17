@@ -23,6 +23,12 @@ import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 
+/*
+ * Class: ChangePasswordActivity.java
+ * Description: Creates bindings and interactable
+ * aspects of the Change password screen.
+ * */
+
 public class ChangePasswordActivity extends AppCompatActivity {
 
     private String mOldPassword;

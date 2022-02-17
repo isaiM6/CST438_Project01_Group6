@@ -15,6 +15,12 @@ import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 
+/*
+ * Class: CreateAccountActivity.java
+ * Description: Creates bindings and interactable
+ * aspects for creating an account on the app.
+ * */
+
 public class CreateAccountActivity extends AppCompatActivity {
 
     private String mUsername;

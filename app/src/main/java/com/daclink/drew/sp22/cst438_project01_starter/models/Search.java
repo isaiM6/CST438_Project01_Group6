@@ -1,6 +1,8 @@
 package com.daclink.drew.sp22.cst438_project01_starter.models;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,25 +10,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Search implements Parcelable
-    {
-        @SerializedName("Title")
-        @Expose
-        private String title;
+/*
+ * Class: Search.java
+ * Description: Search holds basic API response
+ * values and puts them in Java-friendly variables.
+ * */
 
-        @SerializedName("Year")
-        @Expose
-        private String year;
+public class Search implements Parcelable {
+    @SerializedName("Title")
+    @Expose
+    private String title;
 
-        @SerializedName("imdbID")
-        @Expose
-        private String imdbID;
+    @SerializedName("Year")
+    @Expose
+    private String year;
 
-        @SerializedName("Type")
-        @Expose
-        private String type;
+    @SerializedName("imdbID")
+    @Expose
+    private String imdbID;
 
-        @SerializedName("Poster")
+    @SerializedName("Type")
+    @Expose
+    private String type;
+
+    @SerializedName("Poster")
         @Expose
         private String poster;
 

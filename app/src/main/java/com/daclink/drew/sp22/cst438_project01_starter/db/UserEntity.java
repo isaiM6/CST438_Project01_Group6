@@ -8,6 +8,13 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Class: UserEntity.java
+ * Description: UserEntity holds the data from
+ * the db relating to the users in order to show
+ * the user their specific settings and searches.
+ * */
+
 @Entity(tableName = AppDatabase.USER_TABLE)
 public class UserEntity {
 

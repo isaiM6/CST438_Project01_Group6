@@ -13,11 +13,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
+import com.daclink.drew.sp22.cst438_project01_starter.util.SampleUsers;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public class LoginActivity extends AppCompatActivity{
+    private int mUserId;
 
     private String mUsername;
     private String mPassword;
@@ -28,7 +33,11 @@ public class LoginActivity extends AppCompatActivity{
     private Button mLoginBtn;
     private Button mCreateAccBtn;
 
-    SharedPreferences sharedPreferences;
+    private AppDatabase mDb;
+
+    private UserEntity mUser;
+
+    SharedPreferences mSharedPrefs;
 
 
     @Override
@@ -41,9 +50,12 @@ public class LoginActivity extends AppCompatActivity{
         mLoginBtn = findViewById(R.id.button_login);
         mCreateAccBtn = findViewById(R.id.button_register);
 
-        sharedPreferences = getSharedPreferences(constants.SHARED_PREF_NAME,MODE_PRIVATE);
+        mSharedPrefs = getSharedPreferences(constants.SHARED_PREF_NAME, MODE_PRIVATE);
 
-        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+        mDb = AppDatabase.getInstance(getApplicationContext());
+
+        sampleUsers();
+        automaticLogin();
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,22 +63,22 @@ public class LoginActivity extends AppCompatActivity{
                 mUsername = mUsernameField.getText().toString();
                 mPassword = mPasswordField.getText().toString();
 
-                if(db.userDao().userExists(mUsername)){
-                    if(db.userDao().getUserByUsername(mUsername).getPassword().equals(mPassword)){
+                if (mDb.userDao().userExists(mUsername)) {
+                    mUser = mDb.userDao().getUserByUsername(mUsername);
+                    mUserId = mUser.getUserId();
+                    if (mUser.getPassword().equals(mPassword)) {
                         Toast.makeText(getApplicationContext(), "Login Successful.", Toast.LENGTH_SHORT).show();
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString(constants.KEY_USERNAME,mUsername);
+                        SharedPreferences.Editor editor = mSharedPrefs.edit();
+                        editor.putInt(constants.USER_ID_KEY, mUserId);
                         editor.apply();
 
                         Intent intent = new Intent(v.getContext(), MainActivity.class);
                         startActivity(intent);
 
-                    }
-                    else{
+                    } else {
                         Toast.makeText(getApplicationContext(), "Login Unsuccessful.", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Account not found.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -79,9 +91,26 @@ public class LoginActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-
-
     }
 
+    private void sampleUsers() {
+        if (mDb.userDao().getAllUsers().size() == 0) {
+            Executor executor = Executors.newSingleThreadExecutor();
 
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    mDb.userDao().insertUser(SampleUsers.getUsers().get(0),
+                                            SampleUsers.getUsers().get(1));
+                }
+            });
+        }
+    }
+
+    private void automaticLogin() {
+        if (mSharedPrefs.getInt(constants.USER_ID_KEY, -1) != -1) {
+            Intent intent = MainActivity.newIntent(getApplicationContext());
+            startActivity(intent);
+        }
+    }
 }

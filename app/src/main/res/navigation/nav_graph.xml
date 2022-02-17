@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SearchFragment"
             app:destination="@id/SearchFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_ListFragment"
+            app:destination="@id/ListFragment"/>
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -38,4 +41,23 @@
             android:id="@+id/action_SearchFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/ListFragment"
+        android:name="com.daclink.drew.sp22.cst438_project01_starter.MovieListFragment"
+        android:label="List Fragment"
+        tools:layout="@layout/fragment_list">
+
+        <action
+            android:id="@+id/action_ListFragment_to_FirstFragment"
+            app:destination="@id/ListFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/changePasswordActivity"
+        android:name="com.daclink.drew.sp22.cst438_project01_starter.ChangePasswordActivity"
+        android:label="activity_change_password"
+        tools:layout="@layout/activity_change_password" />
+    <activity
+        android:id="@+id/createAccountActivity"
+        android:name="com.daclink.drew.sp22.cst438_project01_starter.CreateAccountActivity"
+        android:label="CreateAccountActivity" />
 </navigation>

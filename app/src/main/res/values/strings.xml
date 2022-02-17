@@ -25,7 +25,21 @@
     <string name="enter_name">Enter name</string>
     <string name="create">Create</string>
     <string name="close">Close</string>
+    <string name="button_save">save</string>
+    <string name="rated">Rated</string>
+    <string name="plot">Plot</string>
+    <string name="genre">Genre</string>
+    <string name="title">Title</string>
+    <string name="released">Released</string>
+    <string name="box_office">Box Office</string>
+    <string name="metascore">Metascore</string>
+    <string name="actors">Actors</string>
+    <string name="director">Director</string>
+    <string name="exit">Exit</string>
+=======
     <string name="title_activity_login">LoginActivity</string>
+    <string name="my_list">My List</string>
+    >>>>>>> loginPage
 
 
 </resources>

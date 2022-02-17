@@ -2,60 +2,56 @@ package com.daclink.drew.sp22.cst438_project01_starter.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.daclink.drew.sp22.cst438_project01_starter.MainActivity;
 import com.daclink.drew.sp22.cst438_project01_starter.MovieDetailsActivity;
-import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
 import com.daclink.drew.sp22.cst438_project01_starter.R;
-import com.daclink.drew.sp22.cst438_project01_starter.models.Search;
-import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
+import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.SearchResultHolder> {
-    private List<Search> searchResults = new ArrayList<>();
-    private Context context;
+public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieListHolder> {
+    private List<IndividualSearch> mResults = new ArrayList<>();
+    private Context mContext;
 
     @NonNull
     @Override
-    public SearchResultHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MovieListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.movie_item, parent, false);
 
-        return new SearchResultHolder(itemView);
+        return new MovieListHolder(itemView);
     }
 
-    public SearchResultsAdapter(Context context) {
-        this.context = context;
+    public MovieListAdapter(Context context) {
+        this.mContext = context;
     }
 
-    public SearchResultsAdapter() {
+    public MovieListAdapter() {
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchResultHolder holder, int position) {
-        Search results = searchResults.get(position);
+    public void onBindViewHolder(@NonNull MovieListHolder holder, int position) {
+        IndividualSearch results = mResults.get(position);
 
         if (results.getTitle() != null) {
             holder.titleTextView.setText(results.getTitle());
         }
 
-        /*
         if (results.getReleased() != null) {
-            holder.releasedDateTextView.setText(results.getYear());
-        }*/
+            holder.releasedTextView.setText(results.getReleased());
+        }
 
         if (results.getPoster() != null) {
             String imageUrl = results.getPoster()
@@ -73,37 +69,34 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = MovieDetailsActivity.newIntent(context.getApplicationContext(), results.getImdbId());
-                context.startActivity(intent);
+                Intent intent = MovieDetailsActivity.newIntent(mContext.getApplicationContext(), results.getImdbID());
+                mContext.startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        if (searchResults == null) {
-            return 0;
-        }
-        return searchResults.size();
+        return mResults.size();
     }
 
-    public void setResults(List<Search> results) {
-        this.searchResults = results;
+    public void setResults(List<IndividualSearch> results) {
+        this.mResults = results;
         notifyDataSetChanged();
     }
 
-    class SearchResultHolder extends RecyclerView.ViewHolder {
+    class MovieListHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
         private TextView directorTextView;
-        private TextView releasedDateTextView;
+        private TextView releasedTextView;
         private ImageView posterImageView;
 
-        public SearchResultHolder(@NonNull View itemView) {
+        public MovieListHolder(@NonNull View itemView) {
             super(itemView);
 
             titleTextView = itemView.findViewById(R.id.movie_item_title);
             directorTextView = itemView.findViewById(R.id.movie_directors);
-            releasedDateTextView = itemView.findViewById(R.id.movie_releaseDate);
+            releasedTextView = itemView.findViewById(R.id.movie_releaseDate);
             posterImageView = itemView.findViewById(R.id.movie_poster);
         }
     }

@@ -1,10 +1,12 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.daclink.drew.sp22.cst438_project01_starter.adapters.SearchResultsAdapter;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentSearchBinding;
+import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
+import com.daclink.drew.sp22.cst438_project01_starter.models.Search;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.SearchViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -44,15 +48,19 @@ public class SearchFragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        // int iter = 0;
         super.onViewCreated(view, savedInstanceState);
 
-        adapter = new SearchResultsAdapter();
+        adapter = new SearchResultsAdapter(getContext());
 
         viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
         viewModel.init();
-        viewModel.getVolumesResponseLiveData().observe(getViewLifecycleOwner(), response -> {
-            if (response != null) {
-                adapter.setResults(response);
+        viewModel.getVolumesResponseLiveData().observe(getViewLifecycleOwner(), new Observer<APIValues>() {
+            @Override
+            public void onChanged(APIValues response) {
+                if (response != null) {
+                    adapter.setResults(response.getSearch());
+                }
             }
         });
 
@@ -69,7 +77,9 @@ public class SearchFragment extends Fragment {
         saveButton = view.findViewById(R.id.fragment_search);
 
         searchButton.setOnClickListener(view3 -> performSearch());
-        // commented out for future fixing
+        // commented out for future fixing=
+//        saveButton.setId(iter+1);
+//        saveButton.setOnClickListener(view3 -> saveMovie());=
 //        saveButton.setOnClickListener(view3 -> saveMovie(keywordEditText.getEditableText().toString()));
     }
 

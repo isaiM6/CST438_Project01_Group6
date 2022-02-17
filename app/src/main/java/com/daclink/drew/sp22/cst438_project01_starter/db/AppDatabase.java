@@ -21,16 +21,17 @@ public abstract class AppDatabase extends RoomDatabase{
 
     public static final String DATABASE_NAME = "AppDatabase.db";
     public static final String USER_TABLE = "userTable";
-    private static  AppDatabase instance;
+    public static final String MOVIE_TABLE = "movieTable";
+
+    private static AppDatabase instance;
 
     public abstract UserDao userDao();
+    // public abstract MovieDao movieDao();
 
     public static synchronized AppDatabase getInstance(Context context) {
 
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(),
-                    AppDatabase.class,
-                    DATABASE_NAME)
+            instance = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
                     .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .build();

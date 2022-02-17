@@ -2,45 +2,33 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivityMovieDetailsBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
-import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
 import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
-import com.daclink.drew.sp22.cst438_project01_starter.models.Search;
-import com.daclink.drew.sp22.cst438_project01_starter.repositories.Repository;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.DetailsViewModel;
-import com.daclink.drew.sp22.cst438_project01_starter.viewModels.SearchViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import java.util.List;
-import java.util.Objects;
 
 public class MovieDetailsActivity extends AppCompatActivity {
     private int mUserId;
-
-    private boolean mFlag;
 
     private String mTitle;
     private String mYear;
@@ -124,26 +112,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
                     mUserDao.updateUser(mUser);
                     changeIcon();
 
-                    Snackbar.make(v, "Movie Successfully Removed", Snackbar.LENGTH_LONG)
-                            .setAction("Go To List",
-                                    new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-
-                                        }
-                                    }).show();
+                    Snackbar.make(v, "Movie Successfully Removed", Snackbar.LENGTH_LONG).show();
                 } else {
                     mUserDao.updateUser(mUser);
                     changeIcon();
 
-                    Snackbar.make(v, "Movie Successfully Saved", Snackbar.LENGTH_LONG)
-                            .setAction("Go To List",
-                                    new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-
-                                        }
-                                    }).show();
+                    Snackbar.make(v, "Movie Successfully Saved", Snackbar.LENGTH_LONG).show();
                 }
             }
         });

@@ -1,6 +1,7 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -102,5 +103,10 @@ public class MovieListFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         mBinding = null;
+    }
+
+    public static Intent newIntent(Context packageContext) {
+        Intent intent = new Intent(packageContext, MovieListFragment.class);
+        return intent;
     }
 }

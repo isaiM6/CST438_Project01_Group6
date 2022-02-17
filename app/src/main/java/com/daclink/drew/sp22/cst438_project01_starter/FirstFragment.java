@@ -14,12 +14,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentFirstBinding;
+import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
-    private String mUsername;
+    private int mUserId;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -33,8 +34,11 @@ public class FirstFragment extends Fragment {
 
         // testing to see if accessing shared preferences inside a fragment from MainActivity works
         sharedPreferences = getActivity().getSharedPreferences(constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        mUsername = sharedPreferences.getString(constants.KEY_USERNAME, null);
-        binding.textviewFirst.setText("Username: \n" + mUsername);
+        mUserId = sharedPreferences.getInt(constants.USER_ID_KEY, -1);
+
+        AppDatabase db = AppDatabase.getInstance(getContext().getApplicationContext());
+        String username = db.userDao().getUserById(mUserId).getUsername();
+        binding.textviewFirst.setText("Username: \n" + username);
 
         // logout button
         binding.buttonLogout.setOnClickListener(view1 -> logout(view, sharedPreferences));

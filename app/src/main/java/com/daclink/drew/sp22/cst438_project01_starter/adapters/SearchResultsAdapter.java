@@ -23,6 +23,12 @@ import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Class: SearchResultsAdapter.java
+ * Description: The SearchResultsAdapter creates a format
+ * to display to the user the resulting movies from their search result.
+ * */
+
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.SearchResultHolder> {
     private List<Search> searchResults = new ArrayList<>();
     private Context context;

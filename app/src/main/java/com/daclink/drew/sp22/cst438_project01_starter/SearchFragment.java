@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -12,11 +14,18 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.daclink.drew.sp22.cst438_project01_starter.adapters.SearchResultsAdapter;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentSearchBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.SearchViewModel;
 import com.google.android.material.textfield.TextInputEditText;
+
+/*
+ * Class: SearchFragment.java
+ * Description: Creates bindings and interactable
+ * aspects of the search menu.
+ * */
 
 public class SearchFragment extends Fragment {
 
@@ -47,6 +56,9 @@ public class SearchFragment extends Fragment {
             public void onChanged(APIValues response) {
                 if (response != null) {
                     adapter.setResults(response.getSearch());
+                }
+                if (response == null) {
+                    Toast.makeText(getContext(), "Results for \"" + keywordEditText.getEditableText().toString() + "\" not found.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

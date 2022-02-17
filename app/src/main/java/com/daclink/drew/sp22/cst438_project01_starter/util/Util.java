@@ -1,6 +1,12 @@
 package com.daclink.drew.sp22.cst438_project01_starter.util;
 
 import java.util.List;
+/*
+ * Class: Util.java
+ * Description: Util.java just holds useful
+ * data modification in case API results aren't
+ * in a useful format and need to be modified.
+ * */
 
 public class Util {
     public String StringJoin(List<String> stringList, String delimeter) {

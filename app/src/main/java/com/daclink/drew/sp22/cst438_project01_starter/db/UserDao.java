@@ -10,6 +10,12 @@ import com.google.firebase.firestore.auth.User;
 
 import java.util.List;
 
+/*
+ * Class: UserDao.java
+ * Description: UserDao deals with the direct access
+ * of the db relating to user data in order to keep
+ * user data persistent across sessions.
+ * */
 @Dao
 public interface UserDao {
     @Insert

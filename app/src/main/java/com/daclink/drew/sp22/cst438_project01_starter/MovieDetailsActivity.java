@@ -32,6 +32,12 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
+/*
+ * Class: MoieDetailsActivity.java
+ * Description: Creates bindings and interactable
+ * aspects of the detailed movie display
+ * */
+
 public class MovieDetailsActivity extends AppCompatActivity {
     private int mUserId;
 

@@ -10,6 +10,13 @@ import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
 import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
 import com.daclink.drew.sp22.cst438_project01_starter.repositories.Repository;
 
+/*
+ * Class: SearchViewModel.java
+ * Description: The SearchViewModel class initializes
+ * a repository to store the data returned from the API.
+ * Note: see DetailsViewModel.java
+ * */
+
 public class SearchViewModel extends AndroidViewModel {
     private Repository repository;
     private LiveData<APIValues> responseLiveData;

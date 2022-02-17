@@ -13,6 +13,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/*
+ * Class: Repository.java
+ * Description: Repository.java is the basic
+ * repo for API responses that are parsed
+ * for useful information and stored so the
+ * program can display it properly for the user.
+ * */
+
 public class Repository {
     private static final String SEARCH_SERVICE_BASE_URL = "https://omdbapi.com/";
 

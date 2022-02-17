@@ -17,6 +17,12 @@ import android.widget.Button;
 
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivityUserProfileBinding;
 
+/*
+ * Class: UserProfile.java
+ * Description: Creates bindings and interactable
+ * aspects of the User profile "page"
+ * */
+
 public class UserProfile extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityUserProfileBinding mBinding;

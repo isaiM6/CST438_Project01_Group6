@@ -1,9 +1,3 @@
-/**
- * Author: Pedro Gutierrez Jr.
- * Last Modified: 02/17/2022
- * Abstract: Gathers and displays the current user's list of movies
- */
-
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import android.content.Context;

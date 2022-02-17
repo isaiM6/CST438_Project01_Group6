@@ -1,8 +1,3 @@
-/**
- * Author: Pedro Gutierrez Jr.
- * Last Modified: 02/17/2022
- * Abstract: View model for individual movies
- */
 package com.daclink.drew.sp22.cst438_project01_starter.viewModels;
 
 import android.app.Application;

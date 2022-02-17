@@ -1,7 +1,6 @@
 /**
- * Author: Pedro Gutierrez Jr.
- * Last Modified: 02/08/2022
- * Abstract: Unit tests for the "change user password" feature
+ * Class: ChangePasswordUnitTest
+ * Description: Unit tests for the "change user password" feature
  */
 
 package com.daclink.drew.sp22.cst438_project01_starter;

@@ -1,8 +1,3 @@
-/**
- * Last Modified: 02/14/2022
- * Abstract: Holds our constants for the project
- */
-
 package com.daclink.drew.sp22.cst438_project01_starter.utilities;
 
 public class constants {

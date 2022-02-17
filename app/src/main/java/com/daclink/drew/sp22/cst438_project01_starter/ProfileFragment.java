@@ -1,8 +1,3 @@
-/**
- * Author: Jose Barroso A.
- * Last Modified: 02/17/2022
- * Abstract: Fragment for user profile action with access to their list and other features
- */
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import android.content.Context;

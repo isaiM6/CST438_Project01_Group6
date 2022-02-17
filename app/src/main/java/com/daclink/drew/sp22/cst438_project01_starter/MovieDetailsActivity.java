@@ -1,9 +1,3 @@
-/**
- * Author: Pedro Gutierrez Jr.
- * Last Modified: 02/17/2022
- * Abstract: Shows an expanded list of details of the selected movie and offers ability to add/remove
- *          movies from user's list.
- */
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;

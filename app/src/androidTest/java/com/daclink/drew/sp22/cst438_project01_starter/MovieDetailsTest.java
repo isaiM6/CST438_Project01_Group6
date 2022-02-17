@@ -1,9 +1,3 @@
-/**
- * Author: Pedro Gutierrez Jr.
- * Last Modified: 02/17/2022
- * Abstract: Instrumented tests for MovieDetailsActivity.java
- */
-
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import android.content.Context;
@@ -28,6 +22,10 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
+/**
+ * Class: MovieDetailsTest.java
+ * Description: Instrumented tests for MovieDetailsActivity.java
+ */
 @RunWith(AndroidJUnit4.class)
 public class MovieDetailsTest {
     private AppDatabase mDb;

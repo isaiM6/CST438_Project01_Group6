@@ -1,8 +1,3 @@
-/**
- * Author: Pedro Gutierrez Jr.
- * Last Modified: 02/17/2022
- * Abstract: Class holds sample users that can be accessed if needed
- */
 package com.daclink.drew.sp22.cst438_project01_starter.util;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;

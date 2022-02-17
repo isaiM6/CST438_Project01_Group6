@@ -1,9 +1,3 @@
-/**
- * Author: Pedro Gutierrez Jr.
- * Last Modified: 02/08/2022
- * Abstract: Allows the user to change their password
- */
-
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AlertDialog;

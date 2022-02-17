@@ -1,8 +1,3 @@
-/**
- * Author: Pedro Gutierrez Jr.
- * Last Modified: 02/16/2022
- * Abstract: Class is used to consume the OMDB Movie API
- */
 package com.daclink.drew.sp22.cst438_project01_starter.repositories;
 
 import androidx.lifecycle.LiveData;

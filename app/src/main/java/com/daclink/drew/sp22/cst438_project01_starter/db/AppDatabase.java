@@ -1,8 +1,3 @@
-/**
- * Last Modified: 02/08/2022
- * Abstract:
- */
-
 package com.daclink.drew.sp22.cst438_project01_starter.db;
 
 import android.content.Context;

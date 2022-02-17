@@ -1,9 +1,3 @@
-/**
- * Author: Pedro Gutierrez Jr.
- * Last Modified: 02/16/2022
- * Abstract: Object to hold movie information from API
- */
-
 package com.daclink.drew.sp22.cst438_project01_starter.models;
 
 import com.google.gson.annotations.Expose;

@@ -1,8 +1,3 @@
-/**
- * Author: Pedro Gutierrez Jr.
- * Last Modified: 02/17/2022
- * Abstract: Adapter for movie list recycler view
- */
 package com.daclink.drew.sp22.cst438_project01_starter.adapters;
 
 import android.content.Context;

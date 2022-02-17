@@ -62,8 +62,6 @@ public class MovieListFragment extends Fragment {
 
         mUserDao = getDatabase();
         mUser = mUserDao.getUserById(mUserId);
-        mImdbIds = mUser.getImdbIds();
-
         // Toast.makeText(getContext().getApplicationContext(), " " + mImdbIds, Toast.LENGTH_SHORT).show();
 
         mAdapter = new MovieListAdapter(getContext());
@@ -76,7 +74,7 @@ public class MovieListFragment extends Fragment {
                 if (movie.getResponse() != null) {
                     mMovies.add(movie);
                     mAdapter.setResults(mMovies);
-                    // Toast.makeText(getContext().getApplicationContext(), " " + mMovies.get(0).getTitle(), Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -93,7 +91,10 @@ public class MovieListFragment extends Fragment {
         return db.userDao();
     }
 
-    private void refreshList() {
+    public void refreshList() {
+        mImdbIds = mUser.getImdbIds();
+        mMovies.clear();
+
         for (String imdbId : mImdbIds) {
             mViewModel.searchMovie(imdbId);
         }

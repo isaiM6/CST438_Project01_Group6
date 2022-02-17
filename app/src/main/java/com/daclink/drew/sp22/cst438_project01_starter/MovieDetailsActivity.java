@@ -16,7 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
+import com.daclink.drew.sp22.cst438_project01_starter.adapters.MovieListAdapter;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivityMovieDetailsBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
@@ -26,6 +29,8 @@ import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.DetailsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 public class MovieDetailsActivity extends AppCompatActivity {
     private int mUserId;
@@ -110,11 +115,13 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 if (!mUser.addImdbId(mImdbId)) {
                     mUser.getImdbIds().remove(mImdbId);
                     mUserDao.updateUser(mUser);
+
                     changeIcon();
 
                     Snackbar.make(v, "Movie Successfully Removed", Snackbar.LENGTH_LONG).show();
                 } else {
                     mUserDao.updateUser(mUser);
+
                     changeIcon();
 
                     Snackbar.make(v, "Movie Successfully Saved", Snackbar.LENGTH_LONG).show();

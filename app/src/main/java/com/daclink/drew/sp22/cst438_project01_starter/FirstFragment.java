@@ -38,12 +38,12 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // testing to see if accessing shared preferences inside a fragment from MainActivity works
-        sharedPreferences = getActivity().getSharedPreferences(constants.SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         mUsername = sharedPreferences.getString(constants.KEY_USERNAME, null);
         binding.textviewFirst.setText("Username: \n" + mUsername);
 
-        binding.buttonFirst.setOnClickListener(view1 -> NavHostFragment.findNavController(FirstFragment.this)
-                .navigate(R.id.action_FirstFragment_to_SecondFragment));
+//        binding.buttonFirst.setOnClickListener(view1 -> NavHostFragment.findNavController(FirstFragment.this)
+//                .navigate(R.id.action_FirstFragment_to_SecondFragment));
 
         binding.toSearch.setOnClickListener(view1 -> NavHostFragment.findNavController(FirstFragment.this)
                 .navigate(R.id.action_FirstFragment_to_SearchFragment));

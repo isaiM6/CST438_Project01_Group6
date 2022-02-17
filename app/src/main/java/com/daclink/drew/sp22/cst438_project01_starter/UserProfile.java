@@ -2,12 +2,11 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.google.firebase.firestore.auth.User;
 
 public class UserProfile extends AppCompatActivity {
     Button logoutBtn;
@@ -19,13 +18,12 @@ public class UserProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-        /*
 
         logoutBtn = (Button)findViewById(R.id.logoutBtn);
         changePW = (Button)findViewById(R.id.changePW);
         favoritesBtn = (Button)findViewById(R.id.favorites);
         historyBtn = (Button)findViewById(R.id.searchHistory);
-        */
+
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,5 +56,10 @@ public class UserProfile extends AppCompatActivity {
                 //startActivity(new Intent(UserProfile.this, .class));
             }
         });
+    }
+
+    public static Intent newIntent(Context packageContext) {
+        Intent intent = new Intent(packageContext, UserProfile.class);
+        return intent;
     }
 }

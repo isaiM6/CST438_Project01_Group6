@@ -34,6 +34,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText mNameField;
 
     private Button mCreateBtn;
+    private Button mCancelBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         mNameField = findViewById(R.id.enterName_edittext);
 
         mCreateBtn = findViewById(R.id.button_create);
+        mCancelBtn = findViewById(R.id.button_cancel);
 
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
@@ -80,6 +82,17 @@ public class CreateAccountActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                startActivity(intent);
+                mUsername = mUsernameField.getText().toString();
+            }
+        });
+
+
     }
 
     public boolean validatePasswords() {

@@ -48,11 +48,8 @@ public class FirstFragment extends Fragment {
         binding.toSearch.setOnClickListener(view1 -> NavHostFragment.findNavController(FirstFragment.this)
                 .navigate(R.id.action_FirstFragment_to_SearchFragment));
 
-        binding.favoritesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+        binding.favoritesButton.setOnClickListener(view1 -> NavHostFragment.findNavController(FirstFragment.this)
+                .navigate(R.id.action_FirstFragment_to_ListFragment));
     }
 
     @Override

@@ -38,7 +38,8 @@
     <string name="exit">Exit</string>
 =======
     <string name="title_activity_login">LoginActivity</string>
->>>>>>> loginPage
+    <string name="my_list">My List</string>
+    >>>>>>> loginPage
 
 
 </resources>

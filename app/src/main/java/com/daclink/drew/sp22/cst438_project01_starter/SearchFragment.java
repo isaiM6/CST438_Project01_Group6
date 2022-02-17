@@ -81,14 +81,6 @@ public class SearchFragment extends Fragment {
 //        saveButton.setOnClickListener(view3 -> saveMovie());
     }
 
-    // this is supposed to save the movie when the save button is clicked
-    public void saveMovie(){
-        List<Search> moviesList = viewModel.getVolumesResponseLiveData().getValue().getSearch();
-        moviesList.get(saveButton.getId());
-
-        // save movie clicked to the user's section in the db
-    }
-
     public void performSearch() {
         String title = keywordEditText.getEditableText().toString();
 

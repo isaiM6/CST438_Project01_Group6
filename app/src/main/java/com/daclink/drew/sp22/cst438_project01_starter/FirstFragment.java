@@ -45,7 +45,9 @@ public class FirstFragment extends Fragment {
 
         AppDatabase db = AppDatabase.getInstance(getContext().getApplicationContext());
         String username = db.userDao().getUserById(mUserId).getUsername();
-        binding.textviewFirst.setText("Username: \n" + username);
+        String name = db.userDao().getUserById(mUserId).getName();
+        binding.textviewFirst.setText("Welcome, \n" + name +"!");
+        binding.textviewStartSearch.setText("Start your movie search here!");
 
         // logout button
         binding.buttonLogout.setOnClickListener(view1 -> logout(view, sharedPreferences));

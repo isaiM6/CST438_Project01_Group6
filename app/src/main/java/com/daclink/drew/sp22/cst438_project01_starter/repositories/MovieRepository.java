@@ -1,3 +1,8 @@
+/**
+ * Author: Pedro Gutierrez Jr.
+ * Last Modified: 02/16/2022
+ * Abstract: Class is used to consume the OMDB Movie API
+ */
 package com.daclink.drew.sp22.cst438_project01_starter.repositories;
 
 import androidx.lifecycle.LiveData;
@@ -24,6 +29,7 @@ public class MovieRepository {
         interceptor.level(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
+        // getting Retrofit ready
         mSearchService = new retrofit2.Retrofit.Builder()
                 .baseUrl(SEARCH_SERVICE_BASE_URL)
                 .client(client)
@@ -32,6 +38,7 @@ public class MovieRepository {
                 .create(SearchService.class);
     }
 
+    // search for movie by imdbId
     public void searchMovieByIMDB_Id(String imdbId) {
         mSearchService.searchValuesByIMDB_Id(imdbId)
                 .enqueue(new Callback<IndividualSearch>() {
@@ -50,6 +57,7 @@ public class MovieRepository {
                 });
     }
 
+    // return API response
     public LiveData<IndividualSearch> getResponseLiveData() {
         return mResponseLiveData;
     }

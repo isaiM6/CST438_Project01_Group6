@@ -12,6 +12,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * TODO: Rework tests as instrumented tests for database testing
+ */
 public class ChangePasswordUnitTest {
     @Test
     public void getPasswordTest() {
@@ -48,7 +51,6 @@ public class ChangePasswordUnitTest {
         assertEquals(newPassword, oldPasswrd);
     }
 
-    // TODO: finish writing test for the change password function
     // tests if user's password was changed and saved correctly
     @Test
     public void changePasswordTest() {

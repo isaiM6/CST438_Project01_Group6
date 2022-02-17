@@ -1,6 +1,10 @@
-package com.daclink.drew.sp22.cst438_project01_starter.models;
+/**
+ * Author: Pedro Gutierrez Jr.
+ * Last Modified: 02/16/2022
+ * Abstract: Object to hold movie information from API
+ */
 
-import android.os.Parcelable;
+package com.daclink.drew.sp22.cst438_project01_starter.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -10,6 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class IndividualSearch {
+    /**
+     *  Variable declarations to hold API values
+     */
     @SerializedName("Title")
     @Expose
     private String title;
@@ -106,6 +113,7 @@ public class IndividualSearch {
     @Expose
     private String response;
 
+    // returns multiple values at once
     public List<String> getValues() {
         ArrayList list = new ArrayList(
                 Arrays.asList(this.title,
@@ -127,6 +135,10 @@ public class IndividualSearch {
         );
         return list;
     }
+
+    /**
+     *  Getters and Setters
+     */
 
     public String getTitle() {
         return title;

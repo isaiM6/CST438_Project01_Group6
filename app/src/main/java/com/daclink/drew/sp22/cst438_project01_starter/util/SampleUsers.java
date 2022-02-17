@@ -1,3 +1,8 @@
+/**
+ * Author: Pedro Gutierrez Jr.
+ * Last Modified: 02/17/2022
+ * Abstract: Class holds sample users that can be accessed if needed
+ */
 package com.daclink.drew.sp22.cst438_project01_starter.util;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
@@ -9,6 +14,7 @@ public class SampleUsers {
     private static final UserEntity USER_1 = new UserEntity("testuser1", "testuser1", "Test User 1");
     private static final UserEntity USER_2 = new UserEntity("testuser2", "testuser2", "Test User 2");
 
+    // retrieve sample users
     public static List<UserEntity> getUsers() {
         List<UserEntity> users = new ArrayList<>();
 

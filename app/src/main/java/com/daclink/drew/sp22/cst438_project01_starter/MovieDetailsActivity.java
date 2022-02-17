@@ -1,3 +1,9 @@
+/**
+ * Author: Pedro Gutierrez Jr.
+ * Last Modified: 02/17/2022
+ * Abstract: Shows an expanded list of details of the selected movie and offers ability to add/remove
+ *          movies from user's list.
+ */
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,26 +85,37 @@ public class MovieDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
+        // get user's shared preferences
         mPrefs = getSharedPreferences(constants.SHARED_PREF_NAME, MODE_PRIVATE);
         mUserId = mPrefs.getInt(constants.USER_ID_KEY, -1);
 
+        // initialize floating action button
         mBinding = ActivityMovieDetailsBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
         mFab = mBinding.movieDetailsFab;
 
+        // initialize user and user DAO
         mUserDao = getDatabase();
         mUser = mUserDao.getUserById(mUserId);
+
+        // imdbId used to retrieve movie info
         mImdbId = getIntent().getStringExtra(constants.IMDB_ID);
 
+        // change floating action button icon
         changeIcon();
 
+        // set up view model
         mViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
         mViewModel.init();
+
+        // view model observes API consumption
         mViewModel.getResponseLiveData().observe(this, new Observer<IndividualSearch>() {
             @Override
             public void onChanged(IndividualSearch movie) {
                 if (movie.getResponse() != null) {
                     mMovie = movie;
+
+                    // set up the UI
                     wireUpDisplay();
                     setValues();
                     setImageView();
@@ -107,21 +124,29 @@ public class MovieDetailsActivity extends AppCompatActivity {
             }
         });
 
+        // search for the movie
         mViewModel.searchMovie(mImdbId);
 
+        // floating actioin button on click listener
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!mUser.addImdbId(mImdbId)) {
+                    // remove movie from user's list
+
                     mUser.getImdbIds().remove(mImdbId);
                     mUserDao.updateUser(mUser);
 
+                    // change floating action button icon
                     changeIcon();
 
                     Snackbar.make(v, "Movie Successfully Removed", Snackbar.LENGTH_LONG).show();
                 } else {
+                    // add movie to user's list
+
                     mUserDao.updateUser(mUser);
 
+                    // change floating action button icon
                     changeIcon();
 
                     Snackbar.make(v, "Movie Successfully Saved", Snackbar.LENGTH_LONG).show();
@@ -130,12 +155,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
         });
     }
 
+    // get instance of database and return user DAO
     private UserDao getDatabase() {
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
         return db.userDao();
     }
 
+    // change floating action button icon
     private void changeIcon() {
+        // changes icon to remove if user already has movie saved, changes icon to add if they don't
         if (mUser.getImdbIds().contains(mImdbId)) {
             mFab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_remove));
         } else {
@@ -143,6 +171,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         }
     }
 
+    // wire up text views
     private void wireUpDisplay() {
         mTitleTextView = findViewById(R.id.movie_details_title);
         mDirectorTextView = findViewById(R.id.movie_details_director);
@@ -156,6 +185,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mPosterImageView = findViewById(R.id.movie_details_imageview);
     }
 
+    // initialize local variables
     private void setValues() {
         mTitle = mMovie.getTitle();
         mYear = mMovie.getYear();
@@ -168,14 +198,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mRated = mMovie.getRated();
         mRuntime = mMovie.getRuntime();
         mPlot = mMovie.getPlot();
-        mYear = mMovie.getYear();
     }
 
+    // set up the poster using Glide
     private void setImageView() {
         mImageUrl = mMovie.getPoster();
 
         if (mImageUrl != null) {
-            mImageUrl.replace("http://", "https://");
+            mImageUrl = mImageUrl.replace("http://", "https://");
 
             Glide.with(getApplicationContext())
                     .load(mImageUrl)
@@ -183,6 +213,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         }
     }
 
+    // set text view information with movie info from API
     private void setTextViews() {
         mTitleTextView.setText(mTitle + ", " + mYear);
         mDirectorTextView.append(": " + mDirector);
@@ -195,6 +226,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mPlotTextView.append(":\n\n     " + mPlot);
     }
 
+    // menu setup
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -214,6 +246,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         }
     }
 
+    // factory intent to switch activities
     public static Intent newIntent(Context packageContext, String imdbId) {
         Intent intent = new Intent(packageContext, MovieDetailsActivity.class);
         intent.putExtra(constants.IMDB_ID, imdbId);

@@ -17,12 +17,12 @@ import retrofit2.http.Query;
  * */
 
 public interface SearchService {
-    @GET("?apikey=" + API_KEY + "&type=movie")
+    @GET("?apikey=4d25d61f&type=movie")
     Call<APIValues> searchValues(
             @Query("s") String title
     );
 
-    @GET("?apikey=4d25d61f" + API_KEY + "")
+    @GET("?apikey=4d25d61f")
     Call<IndividualSearch> searchValuesByIMDB_Id(
             @Query("i") String imdbId
     );

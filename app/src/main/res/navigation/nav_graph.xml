@@ -12,24 +12,14 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-        <action
             android:id="@+id/action_FirstFragment_to_SearchFragment"
             app:destination="@id/SearchFragment" />
         <action
             android:id="@+id/action_FirstFragment_to_ListFragment"
-            app:destination="@id/ListFragment"/>
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.daclink.drew.sp22.cst438_project01_starter.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+            app:destination="@id/ListFragment" />
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_FirstFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
     </fragment>
     <fragment
         android:id="@+id/SearchFragment"
@@ -60,4 +50,8 @@
         android:id="@+id/createAccountActivity"
         android:name="com.daclink.drew.sp22.cst438_project01_starter.CreateAccountActivity"
         android:label="CreateAccountActivity" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.daclink.drew.sp22.cst438_project01_starter.LoginActivity"
+        android:label="LoginActivity" />
 </navigation>

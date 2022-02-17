@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -42,14 +43,26 @@ public class FirstFragment extends Fragment {
         mUsername = sharedPreferences.getString(constants.KEY_USERNAME, null);
         binding.textviewFirst.setText("Username: \n" + mUsername);
 
-//        binding.buttonFirst.setOnClickListener(view1 -> NavHostFragment.findNavController(FirstFragment.this)
-//                .navigate(R.id.action_FirstFragment_to_SecondFragment));
+        // logout button
+        binding.buttonLogout.setOnClickListener(view1 -> logout(view, sharedPreferences));
 
         binding.toSearch.setOnClickListener(view1 -> NavHostFragment.findNavController(FirstFragment.this)
                 .navigate(R.id.action_FirstFragment_to_SearchFragment));
 
         binding.favoritesButton.setOnClickListener(view1 -> NavHostFragment.findNavController(FirstFragment.this)
                 .navigate(R.id.action_FirstFragment_to_ListFragment));
+    }
+
+    // logs out user and returns to login page.
+    public void logout(View v, SharedPreferences sp) {
+        if (sp.getInt(constants.USER_ID_KEY, -1) != -1) {
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putInt(constants.USER_ID_KEY, -1);
+            editor.apply();
+        }
+        Toast.makeText(v.getContext(), "Logout Successful.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(v.getContext(), LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override

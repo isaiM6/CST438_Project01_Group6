@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+ * Class: IndividualSearch.java
+ * Description: IndividualSearch holds more detailed API response
+ * values and puts them in Java-friendly variables.
+ * */
+
 public class IndividualSearch {
     /**
      *  Variable declarations to hold API values

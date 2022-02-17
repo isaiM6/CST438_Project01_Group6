@@ -1,8 +1,3 @@
-/**
- * Class: ChangePasswordUnitTest
- * Description: Unit tests for the "change user password" feature
- */
-
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
@@ -14,6 +9,12 @@ import static org.junit.Assert.*;
 /**
  * TODO: Rework tests as instrumented tests for database testing
  */
+
+/*
+ * Class: ChangePasswordUnitTest.java
+ * Description: Tests for changing the passwords for the program.
+ * */
+
 public class ChangePasswordUnitTest {
     @Test
     public void getPasswordTest() {

@@ -22,6 +22,12 @@ import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 
+/*
+ * Class: ProfileFragment.java
+ * Description: Creates bindings and interactable
+ * aspects of the User profile "page"
+ * */
+
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding mBinding;
 

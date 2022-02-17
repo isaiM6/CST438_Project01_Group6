@@ -21,7 +21,13 @@ import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class LoginActivity extends AppCompatActivity{
+/*
+ * Class: LoginActivity.java
+ * Description: Creates bindings and interactable
+ * aspects of the Login page
+ * */
+
+public class LoginActivity extends AppCompatActivity {
     private int mUserId;
 
     private String mUsername;

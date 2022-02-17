@@ -1,9 +1,17 @@
 package com.daclink.drew.sp22.cst438_project01_starter.models;
 
 import java.util.List;
+
 import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+/*
+ * Class: APIValues.java
+ * Description: APIValues holds the direct package
+ * from the API to correctly display search results.
+ * */
 
 public class APIValues implements Parcelable {
     @SerializedName("Search")

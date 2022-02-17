@@ -30,6 +30,12 @@ import com.daclink.drew.sp22.cst438_project01_starter.viewModels.DetailsViewMode
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Class: MovieListFragment.java
+ * Description: Creates bindings and interactable
+ * aspects of the movie list
+ * */
+
 public class MovieListFragment extends Fragment {
     private int mUserId;
 
@@ -37,7 +43,8 @@ public class MovieListFragment extends Fragment {
 
     private List<IndividualSearch> mMovies = new ArrayList<>();
 
-    private @NonNull FragmentListBinding mBinding;
+    private @NonNull
+    FragmentListBinding mBinding;
     private DetailsViewModel mViewModel;
     private MovieListAdapter mAdapter;
 

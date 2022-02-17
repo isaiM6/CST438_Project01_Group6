@@ -1,16 +1,24 @@
 package com.daclink.drew.sp22.cst438_project01_starter.db;
 
 import androidx.room.TypeConverter;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/*
+ * Class: ArrayListConverter.java
+ * Description: ArrayListConverter converts Strings
+ * and ArrayLists to the opposite format.
+ * */
+
 public class ArrayListConverter {
     @TypeConverter
     public static ArrayList<String> fromString(String value) {
-        Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+        Type listType = new TypeToken<ArrayList<String>>() {
+        }.getType();
         return new Gson().fromJson(value, listType);
     }
 

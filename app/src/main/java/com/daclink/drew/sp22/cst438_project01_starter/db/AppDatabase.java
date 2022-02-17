@@ -9,6 +9,11 @@ import androidx.room.TypeConverters;
 
 import java.util.ArrayList;
 
+/*
+ * Class: AppDatabase.java
+ * Description: AppDatabase.java initializes and
+ * initializes the persistent db for the application.
+ * */
 
 @Database(entities = {UserEntity.class}, version = 2, exportSchema = false)
 @TypeConverters(ArrayListConverter.class)

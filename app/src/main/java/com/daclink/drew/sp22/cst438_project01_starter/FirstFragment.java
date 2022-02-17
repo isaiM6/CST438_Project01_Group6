@@ -17,6 +17,13 @@ import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentFirstB
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 
+/*
+ * Class: FirstFragment.java
+ * Description: Creates bindings and interactable
+ * aspects for navigation to the user page, search page
+ * and logout.
+ * */
+
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;

@@ -9,6 +9,15 @@ import androidx.lifecycle.LiveData;
 import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
 import com.daclink.drew.sp22.cst438_project01_starter.repositories.MovieRepository;
 
+/*
+ * Class: DetailsViewModel.java
+ * Description: The DetailsViewModel in the same
+ * way as 'SearchViewModel.java' creates a landing
+ * place for API responses but for more detailed
+ * information
+ * Note: see SearchViewModel.java
+ * */
+
 public class DetailsViewModel extends AndroidViewModel {
     private MovieRepository mRepo;
     private LiveData<IndividualSearch> mResponseLiveData;

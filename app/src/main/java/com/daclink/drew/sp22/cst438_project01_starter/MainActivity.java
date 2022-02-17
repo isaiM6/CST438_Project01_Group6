@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
+
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,6 +24,12 @@ import androidx.navigation.ui.NavigationUI;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivityMainBinding;
 
 import android.view.Menu;
+
+/*
+ * Class: MainActivity.java
+ * Description: Creates bindings and interactable
+ * aspects of the main landing page and it's fragments.
+ * */
 
 public class MainActivity extends AppCompatActivity {
 

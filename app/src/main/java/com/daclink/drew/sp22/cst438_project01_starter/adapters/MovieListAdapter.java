@@ -45,13 +45,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     public void onBindViewHolder(@NonNull MovieListHolder holder, int position) {
         IndividualSearch results = mResults.get(position);
 
-        if (results.getTitle() != null) {
             holder.titleTextView.setText(results.getTitle());
-        }
 
-        if (results.getReleased() != null) {
-            holder.releasedTextView.setText(results.getReleased());
-        }
+            holder.directorTextView.setText(results.getYear());
+
 
         if (results.getPoster() != null) {
             String imageUrl = results.getPoster()
@@ -60,10 +57,6 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             Glide.with(holder.itemView)
                     .load(imageUrl)
                     .into(holder.posterImageView);
-        }
-
-        if (results.getType() != null) {
-            holder.directorTextView.setText(results.getType());
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +74,11 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
     public void setResults(List<IndividualSearch> results) {
+        /*
+        int size = mResults.size();
+        mResults.clear();
+        notifyItemRangeRemoved(0, size);*/
+
         this.mResults = results;
         notifyDataSetChanged();
     }

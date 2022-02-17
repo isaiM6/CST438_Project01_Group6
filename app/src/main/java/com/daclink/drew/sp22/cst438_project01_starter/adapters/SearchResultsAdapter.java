@@ -51,11 +51,9 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         if (results.getTitle() != null) {
             holder.titleTextView.setText(results.getTitle());
         }
-
-        /*
-        if (results.getReleased() != null) {
+        if (results.getYear() != null) {
             holder.releasedDateTextView.setText(results.getYear());
-        }*/
+        }
 
         if (results.getPoster() != null) {
             String imageUrl = results.getPoster()
@@ -64,10 +62,6 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             Glide.with(holder.itemView)
                     .load(imageUrl)
                     .into(holder.posterImageView);
-        }
-
-        if (results.getType() != null) {
-            holder.directorTextView.setText(results.getType());
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +88,6 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
     class SearchResultHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
-        private TextView directorTextView;
         private TextView releasedDateTextView;
         private ImageView posterImageView;
 
@@ -102,7 +95,6 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             super(itemView);
 
             titleTextView = itemView.findViewById(R.id.movie_item_title);
-            directorTextView = itemView.findViewById(R.id.movie_directors);
             releasedDateTextView = itemView.findViewById(R.id.movie_releaseDate);
             posterImageView = itemView.findViewById(R.id.movie_poster);
         }

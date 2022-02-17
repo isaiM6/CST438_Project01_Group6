@@ -1,6 +1,7 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,8 +62,6 @@ public class MovieListFragment extends Fragment {
 
         mUserDao = getDatabase();
         mUser = mUserDao.getUserById(mUserId);
-        mImdbIds = mUser.getImdbIds();
-
         // Toast.makeText(getContext().getApplicationContext(), " " + mImdbIds, Toast.LENGTH_SHORT).show();
 
         mAdapter = new MovieListAdapter(getContext());
@@ -75,7 +74,7 @@ public class MovieListFragment extends Fragment {
                 if (movie.getResponse() != null) {
                     mMovies.add(movie);
                     mAdapter.setResults(mMovies);
-                    // Toast.makeText(getContext().getApplicationContext(), " " + mMovies.get(0).getTitle(), Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -92,7 +91,10 @@ public class MovieListFragment extends Fragment {
         return db.userDao();
     }
 
-    private void refreshList() {
+    public void refreshList() {
+        mImdbIds = mUser.getImdbIds();
+        mMovies.clear();
+
         for (String imdbId : mImdbIds) {
             mViewModel.searchMovie(imdbId);
         }
@@ -102,5 +104,10 @@ public class MovieListFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         mBinding = null;
+    }
+
+    public static Intent newIntent(Context packageContext) {
+        Intent intent = new Intent(packageContext, MovieListFragment.class);
+        return intent;
     }
 }

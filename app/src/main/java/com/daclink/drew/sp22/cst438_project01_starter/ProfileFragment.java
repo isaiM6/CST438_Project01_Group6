@@ -63,22 +63,27 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // get user's shared preferences
         mPrefs = getActivity().getSharedPreferences(constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         mUserId = mPrefs.getInt(constants.USER_ID_KEY, -1);
 
+        // initialize user and user DAO
         mUserDao = getDatabase();
         mUser = mUserDao.getUserById(mUserId);
 
+        // set up the UI
         wireUpDisplay(view);
         setDisplayValues();
         setOnClickListeners(view);
     }
 
+    // get instance of database and return user DAO
     private UserDao getDatabase() {
         AppDatabase db = AppDatabase.getInstance(getContext().getApplicationContext());
         return db.userDao();
     }
 
+    // wires up UI elements
     private void wireUpDisplay(View view) {
         mFullNameTextView = view.findViewById(R.id.profile_full_name_textview);
         mUserNameTextView = view.findViewById(R.id.profile_username_textview);
@@ -93,6 +98,7 @@ public class ProfileFragment extends Fragment {
         mLogoutBtn = view.findViewById(R.id.logoutBtn);
     }
 
+    // replaces text views with user info
     private void setDisplayValues() {
         mFullName = mUser.getName();
         mUsername = mUser.getUsername();
@@ -106,20 +112,27 @@ public class ProfileFragment extends Fragment {
         mPasswordEditText.setText(mPassword);
     }
 
+    // sets button on click listeners
     private void setOnClickListeners(View view) {
+        // switches from profile fragment to list fragment
         mMyListBtn.setOnClickListener(v -> NavHostFragment.findNavController(this)
                 .navigate(R.id.action_ProfileFragment_to_ListFragment));
 
+        // user log out
         mLogoutBtn.setOnClickListener(v -> logout(view));
     }
 
+    // user log out
     private void logout(View view) {
         if (mPrefs.getInt(constants.USER_ID_KEY, -1) != -1) {
+            // clear user from shared preferences
             SharedPreferences.Editor editor = mPrefs.edit();
             editor.putInt(constants.USER_ID_KEY, -1);
             editor.apply();
         }
         Toast.makeText(view.getContext(), "Logout Successful", Toast.LENGTH_SHORT).show();
+
+        // go back to login screen
         Intent intent = new Intent(view.getContext(), LoginActivity.class);
         startActivity(intent);
     }

@@ -6,10 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.daclink.drew.sp22.cst438_project01_starter.R;
 import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
 import com.daclink.drew.sp22.cst438_project01_starter.repositories.MovieRepository;
-import com.daclink.drew.sp22.cst438_project01_starter.repositories.Repository;
 
 /*
  * Class: DetailsViewModel.java
@@ -28,15 +26,18 @@ public class DetailsViewModel extends AndroidViewModel {
         super(application);
     }
 
+    // initialize view model's repository and response live data
     public void init() {
         mRepo = new MovieRepository();
         mResponseLiveData = mRepo.getResponseLiveData();
     }
 
+    // search for movie by imdbId
     public void searchMovie(String imdbId) {
         mRepo.searchMovieByIMDB_Id(imdbId);
     }
 
+    // get response from API
     public LiveData<IndividualSearch> getResponseLiveData() {
         return mResponseLiveData;
     }

@@ -39,22 +39,18 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         return new MovieListHolder(itemView);
     }
 
+    // parametrized constructor that takes in application context
     public MovieListAdapter(Context context) {
         this.mContext = context;
     }
 
-    public MovieListAdapter() {
-
-    }
-
+    // set up results to be shown in the UI
     @Override
     public void onBindViewHolder(@NonNull MovieListHolder holder, int position) {
         IndividualSearch results = mResults.get(position);
 
-            holder.titleTextView.setText(results.getTitle());
-
-            holder.directorTextView.setText(results.getYear());
-
+        holder.titleTextView.setText(results.getTitle());
+        holder.directorTextView.setText(results.getYear());
 
         if (results.getPoster() != null) {
             String imageUrl = results.getPoster()
@@ -65,34 +61,33 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
                     .into(holder.posterImageView);
         }
 
+        // shows expanded movie details if card is clicked
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // switch to movie details activity
                 Intent intent = MovieDetailsActivity.newIntent(mContext.getApplicationContext(), results.getImdbID());
                 mContext.startActivity(intent);
             }
         });
     }
 
+    // returns number of results shown
     @Override
     public int getItemCount() {
         return mResults.size();
     }
 
+    // set movie results to be displayed
     public void setResults(List<IndividualSearch> results) {
-        /*
-        int size = mResults.size();
-        mResults.clear();
-        notifyItemRangeRemoved(0, size);*/
-
         this.mResults = results;
         notifyDataSetChanged();
     }
 
+    // holds recycler view contents
     class MovieListHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
         private TextView directorTextView;
-        private TextView releasedTextView;
         private ImageView posterImageView;
 
         public MovieListHolder(@NonNull View itemView) {
@@ -100,7 +95,6 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
             titleTextView = itemView.findViewById(R.id.movie_item_title);
             directorTextView = itemView.findViewById(R.id.movie_directors);
-            releasedTextView = itemView.findViewById(R.id.movie_releaseDate);
             posterImageView = itemView.findViewById(R.id.movie_poster);
         }
     }

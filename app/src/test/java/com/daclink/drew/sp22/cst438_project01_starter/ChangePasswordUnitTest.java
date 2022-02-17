@@ -1,9 +1,3 @@
-/**
- * Author: Pedro Gutierrez Jr.
- * Last Modified: 02/08/2022
- * Abstract: Unit tests for the "change user password" feature
- */
-
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
@@ -11,6 +5,10 @@ import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+
+/**
+ * TODO: Rework tests as instrumented tests for database testing
+ */
 
 /*
  * Class: ChangePasswordUnitTest.java
@@ -53,7 +51,6 @@ public class ChangePasswordUnitTest {
         assertEquals(newPassword, oldPasswrd);
     }
 
-    // TODO: finish writing test for the change password function
     // tests if user's password was changed and saved correctly
     @Test
     public void changePasswordTest() {

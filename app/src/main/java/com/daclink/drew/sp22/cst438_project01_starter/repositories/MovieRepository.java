@@ -34,6 +34,7 @@ public class MovieRepository {
         interceptor.level(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
+        // getting Retrofit ready
         mSearchService = new retrofit2.Retrofit.Builder()
                 .baseUrl(SEARCH_SERVICE_BASE_URL)
                 .client(client)
@@ -42,6 +43,7 @@ public class MovieRepository {
                 .create(SearchService.class);
     }
 
+    // search for movie by imdbId
     public void searchMovieByIMDB_Id(String imdbId) {
         mSearchService.searchValuesByIMDB_Id(imdbId)
                 .enqueue(new Callback<IndividualSearch>() {
@@ -60,6 +62,7 @@ public class MovieRepository {
                 });
     }
 
+    // return API response
     public LiveData<IndividualSearch> getResponseLiveData() {
         return mResponseLiveData;
     }

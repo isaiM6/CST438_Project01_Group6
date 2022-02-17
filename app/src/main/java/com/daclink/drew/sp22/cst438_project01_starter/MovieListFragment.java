@@ -39,7 +39,6 @@ import java.util.List;
 public class MovieListFragment extends Fragment {
     private int mUserId;
 
-    private String mImdbId;
     private List<String> mImdbIds;
 
     private List<IndividualSearch> mMovies = new ArrayList<>();
@@ -64,44 +63,54 @@ public class MovieListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // get user's shared preferences
         mPrefs = getContext().getSharedPreferences(constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         mUserId = mPrefs.getInt(constants.USER_ID_KEY, -1);
 
+        // initialize user and user DAO
         mUserDao = getDatabase();
         mUser = mUserDao.getUserById(mUserId);
-        // Toast.makeText(getContext().getApplicationContext(), " " + mImdbIds, Toast.LENGTH_SHORT).show();
 
+        // initialize movie list adapter for recycler view
         mAdapter = new MovieListAdapter(getContext());
 
+        // set up view model
         mViewModel = ViewModelProviders.of(this).get(DetailsViewModel.class);
         mViewModel.init();
+
+        // view model observes API consumption
         mViewModel.getResponseLiveData().observe(getViewLifecycleOwner(), new Observer<IndividualSearch>() {
             @Override
             public void onChanged(IndividualSearch movie) {
                 if (movie.getResponse() != null) {
+                    // passes the user's movies to the movie list adapter
                     mMovies.add(movie);
                     mAdapter.setResults(mMovies);
-
                 }
             }
         });
 
+        // refresh the user list
         refreshList();
 
+        // set up the recycler view
         RecyclerView recyclerView = view.findViewById(R.id.fragment_list_movieListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
     }
 
+    // get instance of database and return user DAO
     private UserDao getDatabase() {
         AppDatabase db = AppDatabase.getInstance(getContext().getApplicationContext());
         return db.userDao();
     }
 
+    // refresh the user list
     public void refreshList() {
         mImdbIds = mUser.getImdbIds();
         mMovies.clear();
 
+        // searching for each movie by imdbId one at a time
         for (String imdbId : mImdbIds) {
             mViewModel.searchMovie(imdbId);
         }
@@ -111,10 +120,5 @@ public class MovieListFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         mBinding = null;
-    }
-
-    public static Intent newIntent(Context packageContext) {
-        Intent intent = new Intent(packageContext, MovieListFragment.class);
-        return intent;
     }
 }

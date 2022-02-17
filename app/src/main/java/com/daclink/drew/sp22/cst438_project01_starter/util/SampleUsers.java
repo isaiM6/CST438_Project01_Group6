@@ -16,6 +16,7 @@ public class SampleUsers {
     private static final UserEntity USER_1 = new UserEntity("testuser1", "testuser1", "Test User 1");
     private static final UserEntity USER_2 = new UserEntity("testuser2", "testuser2", "Test User 2");
 
+    // retrieve sample users
     public static List<UserEntity> getUsers() {
         List<UserEntity> users = new ArrayList<>();
 

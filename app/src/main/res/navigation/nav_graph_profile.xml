@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_profile"
+    app:startDestination="@id/ProfileFragment2">
+
+    <fragment
+        android:id="@+id/ProfileFragment2"
+        android:name="com.daclink.drew.sp22.cst438_project01_starter.ProfileFragment"
+        android:label="Profile Fragment"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_ProfileFragment_to_ListFragment"
+            app:destination="@id/ListFragment2" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ListFragment2"
+        android:name="com.daclink.drew.sp22.cst438_project01_starter.MovieListFragment"
+        android:label="List Fragment"
+        tools:layout="@layout/fragment_list">
+
+        <action
+            android:id="@+id/action_ListFragment_to_ProfileFragment"
+            app:destination="@id/ProfileFragment2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FirstFragment2"
+        android:name="com.daclink.drew.sp22.cst438_project01_starter.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_ProfileFragment"
+            app:destination="@id/ProfileFragment2" />
+    </fragment>
+
+</navigation>

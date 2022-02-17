@@ -22,17 +22,10 @@ public class FirstFragment extends Fragment {
     private String mUsername;
     SharedPreferences sharedPreferences;
 
-
-
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -60,7 +53,7 @@ public class FirstFragment extends Fragment {
             editor.putInt(constants.USER_ID_KEY, -1);
             editor.apply();
         }
-        Toast.makeText(v.getContext(), "Logout Successful.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(v.getContext(), "Logout Successful", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(v.getContext(), LoginActivity.class);
         startActivity(intent);
     }

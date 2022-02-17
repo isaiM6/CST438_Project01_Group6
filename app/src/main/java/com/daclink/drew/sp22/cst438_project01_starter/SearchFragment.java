@@ -1,31 +1,22 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.daclink.drew.sp22.cst438_project01_starter.adapters.SearchResultsAdapter;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentSearchBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
-import com.daclink.drew.sp22.cst438_project01_starter.models.Search;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.SearchViewModel;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SearchFragment extends Fragment {
 
@@ -40,15 +31,11 @@ public class SearchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         binding = FragmentSearchBinding.inflate(inflater, container, false);
-        //View view = inflater.inflate(R.layout.fragment_search, container, false);
-
         return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        // int iter = 0;
         super.onViewCreated(view, savedInstanceState);
 
         adapter = new SearchResultsAdapter(getContext());
@@ -71,22 +58,10 @@ public class SearchFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         keywordEditText = view.findViewById(R.id.fragment_search_keyword);
-        // if user is functional
-        // user.addSearchHistory(keywordEditText.getEditableText().toString());
         searchButton = view.findViewById(R.id.fragment_search);
         saveButton = view.findViewById(R.id.fragment_search);
 
         searchButton.setOnClickListener(view3 -> performSearch());
-        // commented out for future fixing=
-//        saveButton.setId(iter+1);
-//        saveButton.setOnClickListener(view3 -> saveMovie());=
-//        saveButton.setOnClickListener(view3 -> saveMovie(keywordEditText.getEditableText().toString()));
-    }
-
-    // this is supposed to save the movie when the save button is clicked
-    public void saveMovie(String title) {
-        // save movie clicked to the user's section in the db
-        // user.addFavMovie(title);
     }
 
     public void initialSearch() {

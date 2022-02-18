@@ -74,25 +74,25 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     // creates instance of our database
-    public UserDao getDatabase() {
+    private UserDao getDatabase() {
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
         return db.userDao();
     }
 
     // grabs the values entered into the password fields
-    public void getValuesFromDisplay() {
+    private void getValuesFromDisplay() {
         mOldPassword = mOldPasswordField.getText().toString();
         mNewPassword = mNewPasswordField.getText().toString();
     }
 
     // checks that the user entered their correct password
-    public boolean validateOldPassword(UserEntity user, String oldPassword) {
+    private boolean validateOldPassword(UserEntity user, String oldPassword) {
         String userPassword = user.getPassword();
         return userPassword.equals(oldPassword);
     }
 
     // checks that new password isn't the same as old password
-    public boolean validateNewPassword(String newPassword, String oldPassword) {
+    private boolean validateNewPassword(String newPassword, String oldPassword) {
         return !newPassword.equals(oldPassword);
     }
 

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,21 +15,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.daclink.drew.sp22.cst438_project01_starter.adapters.MovieListAdapter;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivityMovieDetailsBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
-import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
+import com.daclink.drew.sp22.cst438_project01_starter.models.MovieEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.DetailsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.List;
 
 /*
  * Class: MoieDetailsActivity.java
@@ -55,7 +50,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private String mImageUrl;
     private String mImdbId;
 
-    private IndividualSearch mMovie;
+    private MovieEntity mMovie;
 
     private TextView mTitleTextView;
     private TextView mDirectorTextView;
@@ -109,9 +104,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mViewModel.init();
 
         // view model observes API consumption
-        mViewModel.getResponseLiveData().observe(this, new Observer<IndividualSearch>() {
+        mViewModel.getResponseLiveData().observe(this, new Observer<MovieEntity>() {
             @Override
-            public void onChanged(IndividualSearch movie) {
+            public void onChanged(MovieEntity movie) {
                 if (movie.getResponse() != null) {
                     mMovie = movie;
 

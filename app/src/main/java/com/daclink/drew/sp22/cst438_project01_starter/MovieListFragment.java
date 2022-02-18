@@ -1,14 +1,11 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +20,7 @@ import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentListBi
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
-import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
+import com.daclink.drew.sp22.cst438_project01_starter.models.MovieEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.DetailsViewModel;
 
@@ -41,7 +38,7 @@ public class MovieListFragment extends Fragment {
 
     private List<String> mImdbIds;
 
-    private List<IndividualSearch> mMovies = new ArrayList<>();
+    private List<MovieEntity> mMovies = new ArrayList<>();
 
     private @NonNull
     FragmentListBinding mBinding;
@@ -79,9 +76,9 @@ public class MovieListFragment extends Fragment {
         mViewModel.init();
 
         // view model observes API consumption
-        mViewModel.getResponseLiveData().observe(getViewLifecycleOwner(), new Observer<IndividualSearch>() {
+        mViewModel.getResponseLiveData().observe(getViewLifecycleOwner(), new Observer<MovieEntity>() {
             @Override
-            public void onChanged(IndividualSearch movie) {
+            public void onChanged(MovieEntity movie) {
                 if (movie.getResponse() != null) {
                     // passes the user's movies to the movie list adapter
                     mMovies.add(movie);

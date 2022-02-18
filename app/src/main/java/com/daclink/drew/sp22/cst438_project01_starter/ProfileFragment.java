@@ -118,6 +118,14 @@ public class ProfileFragment extends Fragment {
         mMyListBtn.setOnClickListener(v -> NavHostFragment.findNavController(this)
                 .navigate(R.id.action_ProfileFragment_to_ListFragment));
 
+        mChangePasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ChangePasswordActivity.newIntent(getContext().getApplicationContext(), mUserId);
+                startActivity(intent);
+            }
+        });
+
         // user log out
         mLogoutBtn.setOnClickListener(v -> logout(view));
     }

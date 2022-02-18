@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="#add8e6"
+            android:background="@drawable/grad"
             android:padding="20dp">
 
             <ImageView
@@ -30,6 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:textColor="@color/white"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/profile_image"
                 android:includeFontPadding="false"
@@ -40,6 +41,7 @@
                 android:id='@+id/profile_username_textview'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:layout_below="@+id/profile_full_name_textview"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/profile_image"

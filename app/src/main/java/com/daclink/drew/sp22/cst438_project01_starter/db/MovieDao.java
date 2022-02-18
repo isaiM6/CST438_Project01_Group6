@@ -22,11 +22,11 @@ public interface MovieDao {
     @Query("SELECT * FROM " + AppDatabase.MOVIE_TABLE + " WHERE movieId = :movieId")
     MovieEntity getMovieById(int movieId);
 
-    @Query("SELECT * FROM " + AppDatabase.MOVIE_TABLE + " WHERE userId = :userId")
-    MovieEntity getMovieByUserId(int userId);
+    @Query("SELECT * FROM " + AppDatabase.MOVIE_TABLE + " WHERE userId = :userId AND imdbID = :imdbId")
+    MovieEntity getMovieByUserId(int userId, String imdbId);
 
-    @Query("SELECT * FROM " + AppDatabase.MOVIE_TABLE + " WHERE title = :title")
-    MovieEntity getMovieByTitle(String title);
+    @Query("SELECT * FROM " + AppDatabase.MOVIE_TABLE + " WHERE userId = :userId")
+    List<MovieEntity> getMoviesByUserId(int userId);
 
     @Query("SELECT * FROM " + AppDatabase.MOVIE_TABLE + " WHERE imdbID = :imdbId")
     MovieEntity getMovieByImdbId(String imdbId);

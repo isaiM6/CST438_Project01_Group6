@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,10 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivityMovieDetailsBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
@@ -27,12 +27,11 @@ import com.daclink.drew.sp22.cst438_project01_starter.viewModels.DetailsViewMode
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-/*
+/**
  * Class: MoieDetailsActivity.java
  * Description: Creates bindings and interactable
  * aspects of the detailed movie display
- * */
-
+ */
 public class MovieDetailsActivity extends AppCompatActivity {
     private int mUserId;
 
@@ -51,6 +50,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private String mImdbId;
 
     private MovieEntity mMovie;
+    private MovieDao mMovieDao;
 
     private TextView mTitleTextView;
     private TextView mDirectorTextView;
@@ -90,7 +90,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mFab = mBinding.movieDetailsFab;
 
         // initialize user and user DAO
-        mUserDao = getDatabase();
+        getDatabase();
         mUser = mUserDao.getUserById(mUserId);
 
         // imdbId used to retrieve movie info
@@ -128,22 +128,23 @@ public class MovieDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!mUser.addImdbId(mImdbId)) {
                     // remove movie from user's list
-
                     mUser.getImdbIds().remove(mImdbId);
                     mUserDao.updateUser(mUser);
 
+                    MovieEntity movie = mMovieDao.getMovieByUserId(mUserId, mImdbId);
+                    mMovieDao.delete(movie);
+                    
                     // change floating action button icon
                     changeIcon();
-
                     Snackbar.make(v, "Movie Successfully Removed", Snackbar.LENGTH_LONG).show();
                 } else {
                     // add movie to user's list
-
                     mUserDao.updateUser(mUser);
+                    mMovie.setUserId(mUserId);
+                    mMovieDao.insertMovie(mMovie);
 
                     // change floating action button icon
                     changeIcon();
-
                     Snackbar.make(v, "Movie Successfully Saved", Snackbar.LENGTH_LONG).show();
                 }
             }
@@ -151,9 +152,10 @@ public class MovieDetailsActivity extends AppCompatActivity {
     }
 
     // get instance of database and return user DAO
-    private UserDao getDatabase() {
+    private void getDatabase() {
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
-        return db.userDao();
+        mUserDao = db.userDao();
+        mMovieDao = db.movieDao();
     }
 
     // change floating action button icon

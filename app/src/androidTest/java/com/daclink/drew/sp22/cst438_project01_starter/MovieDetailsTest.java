@@ -2,24 +2,18 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
-
 import androidx.room.Room;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
-
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
-import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import static org.junit.Assert.*;
 
 /**
@@ -30,13 +24,11 @@ import static org.junit.Assert.*;
 public class MovieDetailsTest {
     private AppDatabase mDb;
     private UserDao mDao;
-    private SharedPreferences mPrefs;
     private UserEntity mTestUser = new UserEntity("testuser", "testuser", "Test User");
 
     @Before
     public void createDb() {
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        mPrefs = context.getSharedPreferences(constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
         mDb = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
         mDao = mDb.userDao();

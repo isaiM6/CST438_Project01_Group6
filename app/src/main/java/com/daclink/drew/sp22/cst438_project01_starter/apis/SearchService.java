@@ -1,7 +1,7 @@
 package com.daclink.drew.sp22.cst438_project01_starter.apis;
 
 import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
-import com.daclink.drew.sp22.cst438_project01_starter.models.MovieEntity;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -20,7 +20,7 @@ import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentListBi
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
-import com.daclink.drew.sp22.cst438_project01_starter.models.MovieEntity;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.DetailsViewModel;
 

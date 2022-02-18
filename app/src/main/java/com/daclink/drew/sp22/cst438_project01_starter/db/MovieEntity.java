@@ -1,5 +1,6 @@
-package com.daclink.drew.sp22.cst438_project01_starter.models;
+package com.daclink.drew.sp22.cst438_project01_starter.db;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -24,6 +25,9 @@ public class MovieEntity {
      */
     @PrimaryKey(autoGenerate = true)
     private int movieId;
+
+    @NonNull
+    private int userId;
 
     @SerializedName("Title")
     @Expose
@@ -153,6 +157,14 @@ public class MovieEntity {
 
     public void setMovieId(int movieId) {
         this.movieId = movieId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {

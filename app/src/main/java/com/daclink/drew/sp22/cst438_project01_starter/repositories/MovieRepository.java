@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.daclink.drew.sp22.cst438_project01_starter.apis.SearchService;
-import com.daclink.drew.sp22.cst438_project01_starter.models.MovieEntity;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

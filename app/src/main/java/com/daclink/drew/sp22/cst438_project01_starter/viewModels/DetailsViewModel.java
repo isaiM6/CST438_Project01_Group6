@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.daclink.drew.sp22.cst438_project01_starter.models.MovieEntity;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.repositories.MovieRepository;
 
 /*

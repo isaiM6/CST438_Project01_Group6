@@ -9,7 +9,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
-import com.daclink.drew.sp22.cst438_project01_starter.models.MovieEntity;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

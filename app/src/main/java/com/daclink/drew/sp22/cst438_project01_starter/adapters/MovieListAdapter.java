@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.daclink.drew.sp22.cst438_project01_starter.MovieDetailsActivity;
 import com.daclink.drew.sp22.cst438_project01_starter.R;
-import com.daclink.drew.sp22.cst438_project01_starter.models.MovieEntity;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 
 import java.util.ArrayList;
 import java.util.List;

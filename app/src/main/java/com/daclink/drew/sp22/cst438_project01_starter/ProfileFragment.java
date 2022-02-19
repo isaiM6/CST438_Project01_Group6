@@ -20,7 +20,7 @@ import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentProfil
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
-import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
+import com.daclink.drew.sp22.cst438_project01_starter.utilities.Constants;
 
 /*
  * Class: ProfileFragment.java
@@ -64,8 +64,8 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // get user's shared preferences
-        mPrefs = getActivity().getSharedPreferences(constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        mUserId = mPrefs.getInt(constants.USER_ID_KEY, -1);
+        mPrefs = getActivity().getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        mUserId = mPrefs.getInt(Constants.USER_ID_KEY, -1);
 
         // initialize user and user DAO
         mUserDao = getDatabase();
@@ -132,10 +132,10 @@ public class ProfileFragment extends Fragment {
 
     // user log out
     private void logout(View view) {
-        if (mPrefs.getInt(constants.USER_ID_KEY, -1) != -1) {
+        if (mPrefs.getInt(Constants.USER_ID_KEY, -1) != -1) {
             // clear user from shared preferences
             SharedPreferences.Editor editor = mPrefs.edit();
-            editor.putInt(constants.USER_ID_KEY, -1);
+            editor.putInt(Constants.USER_ID_KEY, -1);
             editor.apply();
         }
         Toast.makeText(view.getContext(), "Logout Successful", Toast.LENGTH_SHORT).show();

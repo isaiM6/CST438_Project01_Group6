@@ -9,7 +9,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
-import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,7 +58,7 @@ public class MovieDetailsTest {
         String runtime = null;
         String plot = null;
 
-        IndividualSearch movie = new IndividualSearch();
+        MovieEntity movie = new MovieEntity();
         assertNotNull(movie);
 
         movie.setTitle("Test Movie");
@@ -109,7 +109,7 @@ public class MovieDetailsTest {
     // tests the logic of setImageView method
     @Test
     public void setImageViewTest() {
-        IndividualSearch movie = new IndividualSearch();
+        MovieEntity movie = new MovieEntity();
         assertNotNull(movie);
 
         String imageUrl = movie.getPoster();

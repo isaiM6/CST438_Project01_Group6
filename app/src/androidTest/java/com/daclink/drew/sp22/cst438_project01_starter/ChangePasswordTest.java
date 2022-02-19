@@ -15,7 +15,7 @@ import android.util.Log;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
-import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
+import com.daclink.drew.sp22.cst438_project01_starter.utilities.Constants;
 
 /**
  * Class: ChangePasswordTest.java
@@ -119,13 +119,13 @@ public class ChangePasswordTest {
         intent = new Intent(context, MovieDetailsActivity.class);
 
         assertNotNull(intent);
-        assertEquals(defaultValue, intent.getIntExtra(constants.USER_ID_KEY, defaultValue));
+        assertEquals(defaultValue, intent.getIntExtra(Constants.USER_ID_KEY, defaultValue));
 
         mTestUser.setUserId(1);
         assertEquals(1, mTestUser.getUserId());
 
-        intent.putExtra(constants.USER_ID_KEY, mTestUser.getUserId());
-        assertNotEquals(defaultValue, intent.getIntExtra(constants.USER_ID_KEY, defaultValue));;
-        assertEquals(mTestUser.getUserId(), intent.getIntExtra(constants.USER_ID_KEY, defaultValue));
+        intent.putExtra(Constants.USER_ID_KEY, mTestUser.getUserId());
+        assertNotEquals(defaultValue, intent.getIntExtra(Constants.USER_ID_KEY, defaultValue));;
+        assertEquals(mTestUser.getUserId(), intent.getIntExtra(Constants.USER_ID_KEY, defaultValue));
     }
 }

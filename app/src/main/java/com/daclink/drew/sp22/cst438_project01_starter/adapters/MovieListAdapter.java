@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.daclink.drew.sp22.cst438_project01_starter.MovieDetailsActivity;
 import com.daclink.drew.sp22.cst438_project01_starter.R;
-import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ import java.util.List;
  * */
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieListHolder> {
-    private List<IndividualSearch> mResults = new ArrayList<>();
+    private List<MovieEntity> mResults = new ArrayList<>();
     private Context mContext;
 
     @NonNull
@@ -47,7 +46,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     // set up results to be shown in the UI
     @Override
     public void onBindViewHolder(@NonNull MovieListHolder holder, int position) {
-        IndividualSearch results = mResults.get(position);
+        MovieEntity results = mResults.get(position);
 
         holder.titleTextView.setText(results.getTitle());
         holder.directorTextView.setText(results.getYear());
@@ -79,7 +78,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
     // set movie results to be displayed
-    public void setResults(List<IndividualSearch> results) {
+    public void setResults(List<MovieEntity> results) {
         this.mResults = results;
         notifyDataSetChanged();
     }

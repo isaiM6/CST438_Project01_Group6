@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.repositories.MovieRepository;
 
 /*
@@ -20,7 +20,7 @@ import com.daclink.drew.sp22.cst438_project01_starter.repositories.MovieReposito
 
 public class DetailsViewModel extends AndroidViewModel {
     private MovieRepository mRepo;
-    private LiveData<IndividualSearch> mResponseLiveData;
+    private LiveData<MovieEntity> mResponseLiveData;
 
     public DetailsViewModel(@NonNull Application application) {
         super(application);
@@ -38,7 +38,7 @@ public class DetailsViewModel extends AndroidViewModel {
     }
 
     // get response from API
-    public LiveData<IndividualSearch> getResponseLiveData() {
+    public LiveData<MovieEntity> getResponseLiveData() {
         return mResponseLiveData;
     }
 }

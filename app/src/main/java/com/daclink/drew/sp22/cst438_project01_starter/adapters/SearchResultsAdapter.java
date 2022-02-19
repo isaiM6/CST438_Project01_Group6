@@ -2,7 +2,6 @@ package com.daclink.drew.sp22.cst438_project01_starter.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.daclink.drew.sp22.cst438_project01_starter.MainActivity;
 import com.daclink.drew.sp22.cst438_project01_starter.MovieDetailsActivity;
-import com.daclink.drew.sp22.cst438_project01_starter.models.APIValues;
 import com.daclink.drew.sp22.cst438_project01_starter.R;
 import com.daclink.drew.sp22.cst438_project01_starter.models.Search;
-import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
 
 import java.util.ArrayList;
 import java.util.List;

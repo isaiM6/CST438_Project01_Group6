@@ -2,11 +2,9 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +12,7 @@ import android.widget.Toast;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.util.SampleUsers;
-import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
-import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
+import com.daclink.drew.sp22.cst438_project01_starter.utilities.Constants;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 
 import java.util.concurrent.Executor;
@@ -56,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginBtn = findViewById(R.id.button_login);
         mCreateAccBtn = findViewById(R.id.button_register);
 
-        mSharedPrefs = getSharedPreferences(constants.SHARED_PREF_NAME, MODE_PRIVATE);
+        mSharedPrefs = getSharedPreferences(Constants.SHARED_PREF_NAME, MODE_PRIVATE);
 
         mDb = AppDatabase.getInstance(getApplicationContext());
 
@@ -75,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (mUser.getPassword().equals(mPassword)) {
                         Toast.makeText(getApplicationContext(), "Login Successful.", Toast.LENGTH_SHORT).show();
                         SharedPreferences.Editor editor = mSharedPrefs.edit();
-                        editor.putInt(constants.USER_ID_KEY, mUserId);
+                        editor.putInt(Constants.USER_ID_KEY, mUserId);
                         editor.apply();
 
                         Intent intent = new Intent(v.getContext(), MainActivity.class);
@@ -114,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void automaticLogin() {
-        if (mSharedPrefs.getInt(constants.USER_ID_KEY, -1) != -1) {
+        if (mSharedPrefs.getInt(Constants.USER_ID_KEY, -1) != -1) {
             Intent intent = MainActivity.newIntent(getApplicationContext());
             startActivity(intent);
         }

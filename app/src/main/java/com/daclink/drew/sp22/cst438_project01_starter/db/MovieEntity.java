@@ -1,5 +1,10 @@
-package com.daclink.drew.sp22.cst438_project01_starter.models;
+package com.daclink.drew.sp22.cst438_project01_starter.db;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,15 +13,22 @@ import java.util.Arrays;
 import java.util.List;
 
 /*
- * Class: IndividualSearch.java
- * Description: IndividualSearch holds more detailed API response
+ * Class: MovieEntity.java
+ * Description: MovieEntity holds more detailed API response
  * values and puts them in Java-friendly variables.
  * */
 
-public class IndividualSearch {
+@Entity(tableName = AppDatabase.MOVIE_TABLE)
+public class MovieEntity {
     /**
      *  Variable declarations to hold API values
      */
+    @PrimaryKey(autoGenerate = true)
+    private int movieId;
+
+    @NonNull
+    private int userId;
+
     @SerializedName("Title")
     @Expose
     private String title;
@@ -139,6 +151,21 @@ public class IndividualSearch {
     /**
      *  Getters and Setters
      */
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getTitle() {
         return title;
@@ -330,5 +357,34 @@ public class IndividualSearch {
 
     public void setResponse(String response) {
         this.response = response;
+    }
+
+    @Override
+    public String toString() {
+        return "MovieEntity{" +
+                "title='" + title + '\'' +
+                ", year='" + year + '\'' +
+                ", rated='" + rated + '\'' +
+                ", released='" + released + '\'' +
+                ", runtime='" + runtime + '\'' +
+                ", genre='" + genre + '\'' +
+                ", director='" + director + '\'' +
+                ", writer='" + writer + '\'' +
+                ", actors='" + actors + '\'' +
+                ", plot='" + plot + '\'' +
+                ", language='" + language + '\'' +
+                ", country='" + country + '\'' +
+                ", awards='" + awards + '\'' +
+                ", poster='" + poster + '\'' +
+                ", metascore='" + metascore + '\'' +
+                ", imdbRating='" + imdbRating + '\'' +
+                ", imdbVotes='" + imdbVotes + '\'' +
+                ", imdbID='" + imdbID + '\'' +
+                ", type='" + type + '\'' +
+                ", dvd='" + dvd + '\'' +
+                ", boxOffice='" + boxOffice + '\'' +
+                ", production='" + production + '\'' +
+                ", website='" + website + '\'' +
+                '}';
     }
 }

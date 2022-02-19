@@ -15,7 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentFirstBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
-import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
+import com.daclink.drew.sp22.cst438_project01_starter.utilities.Constants;
 
 /*
  * Class: FirstFragment.java
@@ -40,8 +40,8 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // testing to see if accessing shared preferences inside a fragment from MainActivity works
-        sharedPreferences = getActivity().getSharedPreferences(constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        mUserId = sharedPreferences.getInt(constants.USER_ID_KEY, -1);
+        sharedPreferences = getActivity().getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        mUserId = sharedPreferences.getInt(Constants.USER_ID_KEY, -1);
 
         AppDatabase db = AppDatabase.getInstance(getContext().getApplicationContext());
         String username = db.userDao().getUserById(mUserId).getUsername();
@@ -61,9 +61,9 @@ public class FirstFragment extends Fragment {
 
     // logs out user and returns to login page.
     public void logout(View v, SharedPreferences sp) {
-        if (sp.getInt(constants.USER_ID_KEY, -1) != -1) {
+        if (sp.getInt(Constants.USER_ID_KEY, -1) != -1) {
             SharedPreferences.Editor editor = sp.edit();
-            editor.putInt(constants.USER_ID_KEY, -1);
+            editor.putInt(Constants.USER_ID_KEY, -1);
             editor.apply();
         }
         Toast.makeText(v.getContext(), "Logout Successful", Toast.LENGTH_SHORT).show();

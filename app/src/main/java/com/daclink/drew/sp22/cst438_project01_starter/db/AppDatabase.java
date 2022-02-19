@@ -1,12 +1,10 @@
 package com.daclink.drew.sp22.cst438_project01_starter.db;
 
 import android.content.Context;
-
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
-
 import java.util.ArrayList;
 
 /*
@@ -15,7 +13,7 @@ import java.util.ArrayList;
  * initializes the persistent db for the application.
  * */
 
-@Database(entities = {UserEntity.class}, version = 2, exportSchema = false)
+@Database(entities = {UserEntity.class, MovieEntity.class}, version = 3, exportSchema = false)
 @TypeConverters(ArrayListConverter.class)
 public abstract class AppDatabase extends RoomDatabase{
 
@@ -26,7 +24,7 @@ public abstract class AppDatabase extends RoomDatabase{
     private static AppDatabase instance;
 
     public abstract UserDao userDao();
-    // public abstract MovieDao movieDao();
+    public abstract MovieDao movieDao();
 
     public static synchronized AppDatabase getInstance(Context context) {
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.daclink.drew.sp22.cst438_project01_starter.apis.SearchService;
-import com.daclink.drew.sp22.cst438_project01_starter.models.IndividualSearch;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -25,10 +25,10 @@ public class MovieRepository {
     private static final String SEARCH_SERVICE_BASE_URL = "https://omdbapi.com/";
 
     private SearchService mSearchService;
-    private MutableLiveData<IndividualSearch> mResponseLiveData;
+    private MutableLiveData<MovieEntity> mResponseLiveData;
 
     public MovieRepository() {
-        mResponseLiveData = new MutableLiveData<IndividualSearch>();
+        mResponseLiveData = new MutableLiveData<MovieEntity>();
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.level(HttpLoggingInterceptor.Level.BODY);
@@ -46,9 +46,9 @@ public class MovieRepository {
     // search for movie by imdbId
     public void searchMovieByIMDB_Id(String imdbId) {
         mSearchService.searchValuesByIMDB_Id(imdbId)
-                .enqueue(new Callback<IndividualSearch>() {
+                .enqueue(new Callback<MovieEntity>() {
                     @Override
-                    public void onResponse(Call<IndividualSearch> call, Response<IndividualSearch> response) {
+                    public void onResponse(Call<MovieEntity> call, Response<MovieEntity> response) {
                         if (response.body() != null) {
                             mResponseLiveData.postValue(response.body());
                             System.out.println(response);
@@ -56,14 +56,14 @@ public class MovieRepository {
                     }
 
                     @Override
-                    public void onFailure(Call<IndividualSearch> call, Throwable t) {
+                    public void onFailure(Call<MovieEntity> call, Throwable t) {
                         mResponseLiveData.postValue(null);
                     }
                 });
     }
 
     // return API response
-    public LiveData<IndividualSearch> getResponseLiveData() {
+    public LiveData<MovieEntity> getResponseLiveData() {
         return mResponseLiveData;
     }
 }

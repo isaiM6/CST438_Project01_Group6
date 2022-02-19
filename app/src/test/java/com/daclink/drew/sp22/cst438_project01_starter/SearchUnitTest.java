@@ -15,6 +15,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/*
+ * Class: SearchUnitTest.java
+ * Description: Unit tests for the Search class.
+ * */
+
 public class SearchUnitTest extends TestCase {
 
     @Test

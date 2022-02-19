@@ -54,11 +54,11 @@ public class Search implements Parcelable {
         };
 
         protected Search(android.os.Parcel in) {
-            this.title = ((String) in.readValue((String.class.getClassLoader())));
-            this.year = ((String) in.readValue((String.class.getClassLoader())));
-            this.imdbID = ((String) in.readValue((String.class.getClassLoader())));
-            this.type = ((String) in.readValue((String.class.getClassLoader())));
-            this.poster = ((String) in.readValue((String.class.getClassLoader())));
+            this.title = in.readString();
+            this.year = in.readString();
+            this.imdbID = in.readString();
+            this.type = in.readString();
+            this.poster = in.readString();
         }
 
         @Override
@@ -129,7 +129,6 @@ public class Search implements Parcelable {
             dest.writeString(imdbID);
             dest.writeString(type);
             dest.writeString(poster);
-            dest.writeValue(poster);
         }
 
         public List<String> getValues() {
@@ -142,8 +141,15 @@ public class Search implements Parcelable {
             return list;
         }
 
-        public int describeContents() {
-            return  0;
-        }
-
+    public int describeContents() {
+        return 0;
     }
+
+    public void setSearch(String title, String year, String imdbID, String type, String poster) {
+        this.title = title;
+        this.year = year;
+        this.imdbID = imdbID;
+        this.type = type;
+        this.poster = poster;
+    }
+}

@@ -33,11 +33,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * Class: SearchResultsTest.java
+ * Class: SearchInstrumentTest.java
  * Description: Basic Search results test for the program.
  * */
 @RunWith(AndroidJUnit4.class)
-public class SearchResultsTest {
+public class SearchInstrumentTest {
 
     Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
     private Search testSearch;

@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
-import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
+import com.daclink.drew.sp22.cst438_project01_starter.utilities.Constants;
 
 /*
  * Class: ChangePasswordActivity.java
@@ -50,7 +50,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         mNewPasswordField = findViewById(R.id.new_password_edittext);
         mConfirmBtn = findViewById(R.id.change_password_confirm_btn);
 
-        mUserId = getIntent().getIntExtra(constants.USER_ID_KEY, -1);
+        mUserId = getIntent().getIntExtra(Constants.USER_ID_KEY, -1);
         mUserDao = getDatabase();
         mUser = mUserDao.getUserById(mUserId);
 
@@ -130,7 +130,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     // intent for switching to this activity
     public static Intent newIntent(Context packageContext, int userId) {
         Intent intent = new Intent(packageContext, ChangePasswordActivity.class);
-        intent.putExtra(constants.USER_ID_KEY, userId);
+        intent.putExtra(Constants.USER_ID_KEY, userId);
         return intent;
     }
 }

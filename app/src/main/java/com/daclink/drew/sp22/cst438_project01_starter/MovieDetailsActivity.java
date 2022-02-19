@@ -21,7 +21,7 @@ import com.daclink.drew.sp22.cst438_project01_starter.db.MovieDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
-import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
+import com.daclink.drew.sp22.cst438_project01_starter.utilities.Constants;
 import com.daclink.drew.sp22.cst438_project01_starter.viewModels.DetailsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -80,8 +80,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_details);
 
         // get user's shared preferences
-        mPrefs = getSharedPreferences(constants.SHARED_PREF_NAME, MODE_PRIVATE);
-        mUserId = mPrefs.getInt(constants.USER_ID_KEY, -1);
+        mPrefs = getSharedPreferences(Constants.SHARED_PREF_NAME, MODE_PRIVATE);
+        mUserId = mPrefs.getInt(Constants.USER_ID_KEY, -1);
 
         // initialize floating action button
         mBinding = ActivityMovieDetailsBinding.inflate(getLayoutInflater());
@@ -93,7 +93,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mUser = mUserDao.getUserById(mUserId);
 
         // imdbId used to retrieve movie info
-        mImdbId = getIntent().getStringExtra(constants.IMDB_ID);
+        mImdbId = getIntent().getStringExtra(Constants.IMDB_ID);
 
         // change floating action button icon
         changeIcon();
@@ -246,7 +246,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     // factory intent to switch activities
     public static Intent newIntent(Context packageContext, String imdbId) {
         Intent intent = new Intent(packageContext, MovieDetailsActivity.class);
-        intent.putExtra(constants.IMDB_ID, imdbId);
+        intent.putExtra(Constants.IMDB_ID, imdbId);
         return intent;
     }
 }

@@ -16,7 +16,8 @@ import com.daclink.drew.sp22.cst438_project01_starter.databinding.FragmentListBi
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.MovieDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
-import com.daclink.drew.sp22.cst438_project01_starter.utilities.constants;
+import com.daclink.drew.sp22.cst438_project01_starter.utilities.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,8 +51,8 @@ public class MovieListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // get user's shared preferences
-        mPrefs = getContext().getSharedPreferences(constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        mUserId = mPrefs.getInt(constants.USER_ID_KEY, -1);
+        mPrefs = getContext().getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        mUserId = mPrefs.getInt(Constants.USER_ID_KEY, -1);
 
         // initialize user and user DAO
         getDatabase();

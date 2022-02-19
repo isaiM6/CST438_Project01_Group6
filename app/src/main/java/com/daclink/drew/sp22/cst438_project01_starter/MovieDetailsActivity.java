@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivityMovieDetailsBinding;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
@@ -122,7 +121,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         // search for the movie
         mViewModel.searchMovie(mImdbId);
 
-        // floating actioin button on click listener
+        // floating action button on click listener
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +132,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
                     MovieEntity movie = mMovieDao.getMovieByUserId(mUserId, mImdbId);
                     mMovieDao.delete(movie);
-                    
+
                     // change floating action button icon
                     changeIcon();
                     Snackbar.make(v, "Movie Successfully Removed", Snackbar.LENGTH_LONG).show();
@@ -235,6 +234,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.exit:
+                MovieListFragment.refreshList();
                 finish();
                 return true;
 

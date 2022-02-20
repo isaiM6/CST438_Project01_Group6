@@ -76,9 +76,11 @@ public class MovieListFragment extends Fragment {
 
     // refresh the user list
     public static void refreshList() {
-        mMovies.clear();
-        mMovies = mMovieDao.getMoviesByUserId(mUserId);
-        mAdapter.setResults(mMovies);
+        if (mMovies != null && mMovieDao != null && mAdapter != null) {
+            mMovies.clear();
+            mMovies = mMovieDao.getMoviesByUserId(mUserId);
+            mAdapter.setResults(mMovies);
+        }
     }
 
     @Override

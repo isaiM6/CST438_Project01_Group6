@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/*
+/**
  * Class: MovieEntity.java
  * Description: MovieEntity holds more detailed API response
  * values and puts them in Java-friendly variables.
- * */
+ */
 
 @Entity(tableName = AppDatabase.MOVIE_TABLE)
 public class MovieEntity {
@@ -125,27 +125,62 @@ public class MovieEntity {
     @Expose
     private String response;
 
-    // returns multiple values at once
-    public List<String> getValues() {
-        ArrayList list = new ArrayList(
-                Arrays.asList(this.title,
-                        this.year,
-                        this.released,
-                        this.genre,
-                        this.director,
-                        this.writer,
-                        this.actors,
-                        this.plot,
-                        this.metascore,
-                        this.language,
-                        this.poster,
-                        this.boxOffice,
-                        this.rated,
-                        this.country,
-                        this.runtime,
-                        this.imdbID)
-        );
-        return list;
+    // default constructor
+    public MovieEntity() {
+
+    }
+
+    // parameterized constructor
+    public MovieEntity(int userId,
+                       String title,
+                       String year,
+                       String rated,
+                       String released,
+                       String runtime,
+                       String genre,
+                       String director,
+                       String writer,
+                       String actors,
+                       String plot,
+                       String language,
+                       String country,
+                       String awards,
+                       String poster,
+                       String metascore,
+                       String imdbRating,
+                       String imdbVotes,
+                       String imdbID,
+                       String type,
+                       String dvd,
+                       String boxOffice,
+                       String production,
+                       String website,
+                       String response) {
+        this.userId = userId;
+        this.title = title;
+        this.year = year;
+        this.rated = rated;
+        this.released = released;
+        this.runtime = runtime;
+        this.genre = genre;
+        this.director = director;
+        this.writer = writer;
+        this.actors = actors;
+        this.plot = plot;
+        this.language = language;
+        this.country = country;
+        this.awards = awards;
+        this.poster = poster;
+        this.metascore = metascore;
+        this.imdbRating = imdbRating;
+        this.imdbVotes = imdbVotes;
+        this.imdbID = imdbID;
+        this.type = type;
+        this.dvd = dvd;
+        this.boxOffice = boxOffice;
+        this.production = production;
+        this.website = website;
+        this.response = response;
     }
 
     /**
@@ -357,34 +392,5 @@ public class MovieEntity {
 
     public void setResponse(String response) {
         this.response = response;
-    }
-
-    @Override
-    public String toString() {
-        return "MovieEntity{" +
-                "title='" + title + '\'' +
-                ", year='" + year + '\'' +
-                ", rated='" + rated + '\'' +
-                ", released='" + released + '\'' +
-                ", runtime='" + runtime + '\'' +
-                ", genre='" + genre + '\'' +
-                ", director='" + director + '\'' +
-                ", writer='" + writer + '\'' +
-                ", actors='" + actors + '\'' +
-                ", plot='" + plot + '\'' +
-                ", language='" + language + '\'' +
-                ", country='" + country + '\'' +
-                ", awards='" + awards + '\'' +
-                ", poster='" + poster + '\'' +
-                ", metascore='" + metascore + '\'' +
-                ", imdbRating='" + imdbRating + '\'' +
-                ", imdbVotes='" + imdbVotes + '\'' +
-                ", imdbID='" + imdbID + '\'' +
-                ", type='" + type + '\'' +
-                ", dvd='" + dvd + '\'' +
-                ", boxOffice='" + boxOffice + '\'' +
-                ", production='" + production + '\'' +
-                ", website='" + website + '\'' +
-                '}';
     }
 }

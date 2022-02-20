@@ -2,10 +2,8 @@ package com.daclink.drew.sp22.cst438_project01_starter.repositories;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.daclink.drew.sp22.cst438_project01_starter.apis.SearchService;
 import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -21,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Note: see Repository.java
  */
 public class MovieRepository {
-    private static final String SEARCH_SERVICE_BASE_URL = "https://omdbapi.com/";
+    public static final String SEARCH_SERVICE_BASE_URL = "https://omdbapi.com/";
 
     private SearchService mSearchService;
     private MutableLiveData<MovieEntity> mResponseLiveData;

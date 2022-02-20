@@ -49,7 +49,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         MovieEntity results = mResults.get(position);
 
         holder.titleTextView.setText(results.getTitle());
-        holder.directorTextView.setText(results.getYear());
+        holder.yearTextView.setText(results.getYear());
 
         if (results.getPoster() != null) {
             String imageUrl = results.getPoster()
@@ -86,14 +86,14 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     // holds recycler view contents
     class MovieListHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
-        private TextView directorTextView;
+        private TextView yearTextView;
         private ImageView posterImageView;
 
         public MovieListHolder(@NonNull View itemView) {
             super(itemView);
 
             titleTextView = itemView.findViewById(R.id.movie_item_title);
-            directorTextView = itemView.findViewById(R.id.movie_directors);
+            yearTextView = itemView.findViewById(R.id.movie_directors);
             posterImageView = itemView.findViewById(R.id.movie_poster);
         }
     }

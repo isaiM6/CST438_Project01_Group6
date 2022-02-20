@@ -13,14 +13,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/*
+/**
  * Class: MovieRepository.java
  * Description: MovieRepository works the same
  * as Repository.java but deals with more detailed
  * API responses.
  * Note: see Repository.java
- * */
-
+ */
 public class MovieRepository {
     private static final String SEARCH_SERVICE_BASE_URL = "https://omdbapi.com/";
 

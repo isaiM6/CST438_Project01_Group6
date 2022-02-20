@@ -7,6 +7,7 @@ import androidx.room.Room;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
+import com.daclink.drew.sp22.cst438_project01_starter.db.MovieDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
@@ -23,15 +24,18 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class MovieDetailsTest {
     private AppDatabase mDb;
-    private UserDao mDao;
+    private UserDao mUserDao;
+    private MovieDao mMovieDao;
     private UserEntity mTestUser = new UserEntity("testuser", "testuser", "Test User");
+    private MovieEntity mTestMovie = new MovieEntity();
 
     @Before
     public void createDb() {
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         mDb = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
-        mDao = mDb.userDao();
+        mUserDao = mDb.userDao();
+        mMovieDao = mDb.movieDao();
 
         Log.i("MovieDetailsTest", "created DB");
     }
@@ -135,8 +139,8 @@ public class MovieDetailsTest {
         UserEntity user = null;
         assertNull(user);
 
-        mDao.insertUser(mTestUser);
-        user = mDao.getUserByUsername("testuser");
+        mUserDao.insertUser(mTestUser);
+        user = mUserDao.getUserByUsername("testuser");
 
         assertNotNull(user);
         assertEquals(0, user.getImdbIds().size());
@@ -145,11 +149,17 @@ public class MovieDetailsTest {
 
         assertEquals(1, user.getImdbIds().size());
         mTestUser = user;
+        mTestMovie.setImdbID("100");
+        mTestMovie.setUserId(mTestUser.getUserId());
 
-        mDao.updateUser(mTestUser);
+        mUserDao.updateUser(mTestUser);
+        mMovieDao.insertMovie(mTestMovie);
 
-        assertEquals(1, mDao.getUserByUsername("testuser").getImdbIds().size());
-        assertEquals("100", mDao.getUserByUsername("testuser").getImdbIds().get(0));
+        assertEquals(1, mUserDao.getUserByUsername("testuser").getImdbIds().size());
+        assertEquals("100", mUserDao.getUserByUsername("testuser").getImdbIds().get(0));
+        assertNotNull(mMovieDao.getMovieByUserId(1, "100"));
+        assertEquals(1, mMovieDao.getMovieById(1).getUserId());
+        assertEquals("100", mMovieDao.getMovieById(1).getImdbID());
     }
 
     // tests removal of movie from user's list
@@ -157,23 +167,35 @@ public class MovieDetailsTest {
     public void removeMovieTest() {
         UserEntity user;
 
-        mDao.insertUser(mTestUser);
-        user = mDao.getUserByUsername("testuser");
+        mUserDao.insertUser(mTestUser);
+        user = mUserDao.getUserByUsername("testuser");
+        mTestMovie.setUserId(1);
 
         assertTrue(user.addImdbId("100"));
         assertTrue(user.addImdbId("200"));
         assertTrue(user.addImdbId("300"));
 
+        mTestMovie.setImdbID("100");
+        mMovieDao.insertMovie(mTestMovie);
+        mTestMovie.setImdbID("200");
+        mMovieDao.insertMovie(mTestMovie);
+        mTestMovie.setImdbID("300");
+        mMovieDao.insertMovie(mTestMovie);
+
         assertEquals(3, user.getImdbIds().size());
+        assertEquals(3, mMovieDao.getMoviesByUserId(1).size());
 
         user.getImdbIds().remove("200");
+        mMovieDao.delete(mMovieDao.getMovieByUserId(1, "200"));
         assertNotEquals(3, user.getImdbIds().size());
         assertEquals(2, user.getImdbIds().size());
+        assertNotEquals(3, mMovieDao.getMoviesByUserId(1).size());
+        assertEquals(2, mMovieDao.getMoviesByUserId(1).size());
 
         mTestUser = user;
-        mDao.updateUser(mTestUser);
+        mUserDao.updateUser(mTestUser);
 
-        assertEquals(2, mDao.getUserByUsername("testuser").getImdbIds().size());
+        assertEquals(2, mUserDao.getUserByUsername("testuser").getImdbIds().size());
     }
 
     // tests creation of MovieDetailsActivity intent

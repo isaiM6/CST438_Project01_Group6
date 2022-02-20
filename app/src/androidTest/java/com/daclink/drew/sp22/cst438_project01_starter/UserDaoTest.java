@@ -16,11 +16,10 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-/*
+/**
  * Class: UserDaoTest.java
- * Description: Basic tests for the db.
- * */
-
+ * Description: Basic tests for the user DAO
+ */
 @RunWith(AndroidJUnit4.class)
 public class UserDaoTest {
     private Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();

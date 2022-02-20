@@ -1,9 +1,7 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
-
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 /**
@@ -12,31 +10,31 @@ import static org.junit.Assert.*;
  */
 public class MovieEntityTest {
     private MovieEntity mMovie = new MovieEntity();
-    private int mUserId = 1;
-    private String mTitle = "Test Title";
-    private String mYear = "Test Year";
-    private String mRated = "Test Rated";
-    private String mReleased = "Test Released";
-    private String mRuntime = "Test Runtime";
-    private String mGenre = "Test Genre";
-    private String mDirector = "Test Director";
-    private String mWriter = "Test Writer";
-    private String mActors = "Test Actors";
-    private String mPlot = "Test Plot";
-    private String mLanguage = "Test Language";
-    private String mCountry = "Test Country";
-    private String mAwards = "Test Awards";
-    private String mPoster = "Test Poster";
-    private String mMetascore = "Test Metascore";
-    private String mImdbRating = "Test ImdbRating";
-    private String mImdbVotes = "Test ImdbVotes";
-    private String mImdbId = "Test ImdbId";
-    private String mType = "Test Type";
-    private String mDvd = "Test Dvd";
-    private String mBoxOffice = "Test Box Office";
-    private String mProduction = "Test Production";
-    private String mWebsite = "Test Website";
-    private String mResponse = "Test Response";
+    private final int mUserId = 1;
+    private final String mTitle = "Test Title";
+    private final String mYear = "Test Year";
+    private final String mRated = "Test Rated";
+    private final String mReleased = "Test Released";
+    private final String mRuntime = "Test Runtime";
+    private final String mGenre = "Test Genre";
+    private final String mDirector = "Test Director";
+    private final String mWriter = "Test Writer";
+    private final String mActors = "Test Actors";
+    private final String mPlot = "Test Plot";
+    private final String mLanguage = "Test Language";
+    private final String mCountry = "Test Country";
+    private final String mAwards = "Test Awards";
+    private final String mPoster = "Test Poster";
+    private final String mMetascore = "Test Metascore";
+    private final String mImdbRating = "Test ImdbRating";
+    private final String mImdbVotes = "Test ImdbVotes";
+    private final String mImdbId = "Test ImdbId";
+    private final String mType = "Test Type";
+    private final String mDvd = "Test Dvd";
+    private final String mBoxOffice = "Test Box Office";
+    private final String mProduction = "Test Production";
+    private final String mWebsite = "Test Website";
+    private final String mResponse = "Test Response";
 
     @Test
     public void movieConstructorTest() {

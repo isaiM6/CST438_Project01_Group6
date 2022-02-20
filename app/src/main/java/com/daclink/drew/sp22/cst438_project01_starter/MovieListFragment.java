@@ -17,7 +17,6 @@ import com.daclink.drew.sp22.cst438_project01_starter.db.AppDatabase;
 import com.daclink.drew.sp22.cst438_project01_starter.db.MovieDao;
 import com.daclink.drew.sp22.cst438_project01_starter.db.MovieEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.Constants;
-
 import java.util.ArrayList;
 import java.util.List;
 

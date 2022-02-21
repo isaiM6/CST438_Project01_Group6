@@ -17,14 +17,15 @@ import com.daclink.drew.sp22.cst438_project01_starter.db.UserEntity;
 import com.daclink.drew.sp22.cst438_project01_starter.utilities.Constants;
 
 /**
- * Class: LoginTest.java
- * Description: Instrumented test for LoginActivity.java
+ * Class: CreateAccountTest.java
+ * Description: Instrumented test for CreateAccountTest.java
  */
+
 @RunWith(AndroidJUnit4.class)
-public class LoginTest {
+public class CreateAccountTest {
     private AppDatabase mDb;
     private UserDao mDao;
-    private UserEntity mTestUser = new UserEntity("testuser", "testuser", "Test User");
+    private UserEntity mTestUser = new UserEntity("user999", "testuser", "Test User");
 
     @Before
     public void createDb() {
@@ -33,33 +34,37 @@ public class LoginTest {
         mDb = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
         mDao = mDb.userDao();
 
-        Log.i("LoginTest", "created DB");
+        Log.i("CreateAccountTest", "created DB");
     }
 
     @After
     public void closeDb() {
         mDb.close();
 
-        Log.i("LoginTest", "closeDb: ");
+        Log.i("CreateAccountTest", "closeDb: ");
     }
 
-    // testing by checking if passing the userID to the MainActivity works
+    // testing adding a user, switching activities and checking if user is in database
 
     @Test
-    public void loginIntentTest() {
+    public void createAccountIntentTest() {
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         Intent intent = null;
+        mTestUser.setUserId(5);
+        assertEquals(5, mTestUser.getUserId());
+        mDao.insertUser(mTestUser);
         int defaultValue = -1;
 
         assertNull(intent);
-        intent = new Intent(context, MainActivity.class);
-        assertEquals(defaultValue, intent.getIntExtra(Constants.USER_ID_KEY, defaultValue));
-        mTestUser.setUserId(1);
-        intent.putExtra(Constants.USER_ID_KEY, mTestUser.getUserId());
 
-        assertEquals(1, mTestUser.getUserId());
 
-        assertNotEquals(defaultValue, intent.getIntExtra(Constants.USER_ID_KEY, defaultValue));;
+        intent = new Intent(context, LoginActivity.class);
+        intent.putExtra(Constants.USER_ID_KEY,mDao.getUserByUsername("user999").getUserId());
+
+
+        assertEquals(5, mTestUser.getUserId());
+
         assertEquals(mTestUser.getUserId(), intent.getIntExtra(Constants.USER_ID_KEY, defaultValue));
+        assertTrue(mDao.userExists(mTestUser.getUsername()));
     }
 }

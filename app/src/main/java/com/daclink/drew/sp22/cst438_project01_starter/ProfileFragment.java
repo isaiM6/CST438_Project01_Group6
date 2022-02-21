@@ -45,7 +45,6 @@ public class ProfileFragment extends Fragment {
     private EditText mPasswordEditText;
 
     private Button mMyListBtn;
-    private Button mSearchHistoryBtn;
     private Button mChangePasswordBtn;
     private Button mLogoutBtn;
 
@@ -93,7 +92,6 @@ public class ProfileFragment extends Fragment {
         mPasswordEditText = view.findViewById(R.id.profile_password_edittext);
 
         mMyListBtn = view.findViewById(R.id.favorites);
-        mSearchHistoryBtn = view.findViewById(R.id.searchHistory);
         mChangePasswordBtn = view.findViewById(R.id.changePW);
         mLogoutBtn = view.findViewById(R.id.logoutBtn);
     }

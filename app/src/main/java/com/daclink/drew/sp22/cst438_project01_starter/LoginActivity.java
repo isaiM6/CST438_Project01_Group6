@@ -20,7 +20,7 @@ import java.util.concurrent.Executors;
 
 /*
  * Class: LoginActivity.java
- * Description: Creates bindings and interactable
+ * Description: Creates bindings and interactive
  * aspects of the Login page
  * */
 
